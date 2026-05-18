@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sailpin — Team Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pacific:#1B4F8A;--pacific-mid:#2E6DB4;--pacific-dark:#0D2F55;--pacific-mist:#C8DDEF;
+  --coral:#E8603A;--coral-light:#F28B6B;--coral-deep:#C04A28;--coral-pale:#FAD9CE;
+  --sand:#F5EFE0;--sand-dark:#E8DEC8;--sun-white:#FDF8EE;--linen:#EDE4D0;
+  --ink:#1A2535;--slate:#5A6A80;--mist:#A8BDD0;
+  --success:#3D8B5E;--warning:#D4883A;--error:#C4504A;--info:#2E6DB4;
+}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--sand);color:var(--ink);line-height:1.5}
+
+/* AGENDA CHECKBOXES */
+.agenda-check{width:20px;height:20px;accent-color:var(--pacific);cursor:pointer;flex-shrink:0}
+.agenda-item{transition:.3s}
+.agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
+.agenda-item.checked .agenda-num{background:var(--success) !important;opacity:.6}
+.agenda-item.checked{opacity:.5}
+
+/* EMAIL BUTTON */
+.email-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--coral);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:600;transition:.2s;margin-left:auto}
+.email-btn:hover{background:var(--coral-deep);color:#fff}
+
+/* DASHBOARD */
+#dashboard{display:block}
+header{background:var(--pacific-dark);border-bottom:3px solid var(--coral);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+header h1{color:#fff;font-size:22px;font-weight:700;letter-spacing:-.3px}
+header h1 .pin{color:var(--coral)}
+header .tagline{color:var(--mist);font-size:11px;font-weight:500;font-style:italic;letter-spacing:1.5px;margin-top:2px}
+.header-meta{text-align:right;font-size:12px;color:var(--mist)}
+.header-meta .date{font-weight:600;color:var(--coral-light)}
+
+main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
+
+/* SECTION */
+.section{margin-bottom:32px}
+.section-title{font-size:16px;font-weight:700;color:var(--pacific-dark);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--sand-dark);display:flex;align-items:center;gap:8px}
+.section-title .icon{font-size:20px}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--sun-white);border-radius:12px;padding:20px;border-left:4px solid var(--pacific);box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.kpi-card.coral{border-left-color:var(--coral)}
+.kpi-card.mist{border-left-color:var(--pacific-mid)}
+.kpi-card.success{border-left-color:var(--success)}
+.kpi-card .label{font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.kpi-card .value{font-size:32px;font-weight:700;color:var(--ink);margin:4px 0}
+.kpi-card .detail{font-size:12px;color:var(--slate)}
+
+/* TASK TABLE */
+.task-table{width:100%;border-collapse:collapse;background:var(--sun-white);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.task-table th{background:var(--pacific-dark);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:12px 16px;text-align:left;font-weight:600}
+.task-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--linen)}
+.task-table tr:last-child td{border:none}
+.task-table tr:hover td{background:var(--sand)}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;text-transform:uppercase}
+.badge.on-track{background:var(--pacific-mist);color:var(--pacific)}
+.badge.in-progress{background:var(--coral-pale);color:var(--coral-deep)}
+.badge.completed{background:#E8F5E9;color:var(--success)}
+.badge.pending{background:var(--linen);color:var(--slate)}
+
+/* MANUAL TASKS */
+.manual-section{background:var(--sun-white);border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.manual-section h3{font-size:14px;font-weight:700;color:var(--pacific-dark);margin-bottom:12px}
+.manual-task{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--linen);font-size:13px}
+.manual-task:last-child{border:none}
+.manual-task .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.manual-task .dot.pending{background:var(--warning)}
+.manual-task .dot.in-progress{background:var(--info)}
+.manual-task .dot.done{background:var(--success)}
+.manual-task .text{flex:1}
+.manual-task .date{font-size:11px;color:var(--slate)}
+
+/* TABS */
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;background:var(--sun-white);border-radius:10px;padding:4px;box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--slate);cursor:pointer;border-radius:8px;transition:.2s}
+.tab.active{background:var(--pacific-dark);color:#fff}
+.tab:hover:not(.active){background:var(--sand)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* FOOTER */
+footer{text-align:center;padding:24px;font-size:12px;color:var(--slate);border-top:1px solid var(--sand-dark);margin-top:32px}
+footer strong{color:var(--pacific-dark)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header{flex-direction:column;gap:8px;text-align:center}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="visible">
+<header>
+  <div>
+    <h1>sail<span class="pin">pin</span> — Team Dashboard</h1>
+    <div class="tagline">Ready About</div>
+  </div>
+  <a href="mailto:turgutderman@gmail.com?subject=SailPin%20Dashboard%20Update" class="email-btn">&#9993; Email Derman</a>
+  <div class="header-meta">
+    <div class="date">Last Updated: May 17, 2026</div>
+    <div>Updated by Derman via Claude</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== TODAY'S CALL AGENDA ===== -->
+<div class="section" style="background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px">
+  <div class="section-title" style="border-bottom:none;margin-bottom:12px"><span class="icon">&#127909;</span> Today's Call Agenda — May 17, 2026</div>
+  <ol style="list-style:none;padding:0;margin:0" id="agenda-list">
+    <li class="agenda-item" style="padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:center;gap:10px">
+      <input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)">
+      <span class="agenda-num" style="background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">1</span>
+      <span class="agenda-text"><strong style="color:var(--ink)">Agenda items will be added here</strong></span>
+    </li>
+  </ol>
+</div>
+
+<!-- ===== DERMAN'S UPDATES ===== -->
+<div class="section" style="background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--coral);margin-bottom:32px">
+  <div class="section-title" style="border-bottom:none;margin-bottom:12px"><span class="icon">&#9733;</span> Derman's Updates</div>
+  <ul style="list-style:none;padding:0;margin:0">
+    <li style="padding:10px 0;font-size:14px;display:flex;align-items:baseline;gap:10px">
+      <span style="color:var(--coral);font-size:16px;line-height:1">&#9679;</span>
+      <span><strong style="color:var(--pacific)">SailPin dashboard created and deployed to Vercel</strong> <span style="font-size:12px;color:var(--slate)">— May 17, 2026</span></span>
+    </li>
+  </ul>
+</div>
+
+<!-- ===== KEY METRICS ===== -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#9670;</span> Key Metrics</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="label">Printful Products</div>
+      <div class="value">—</div>
+      <div class="detail">Connect Printful to populate</div>
+    </div>
+    <div class="kpi-card coral">
+      <div class="label">Shopify Orders</div>
+      <div class="value">—</div>
+      <div class="detail">Connect Shopify to populate</div>
+    </div>
+    <div class="kpi-card mist">
+      <div class="label">Social Followers</div>
+      <div class="value">—</div>
+      <div class="detail">Across all platforms</div>
+    </div>
+    <div class="kpi-card success">
+      <div class="label">Revenue MTD</div>
+      <div class="value">—</div>
+      <div class="detail">Month to date</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TASK TRACKER ===== -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#9745;</span> Task Tracker — SailPin Projects</div>
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab('products')">Products & PoD</div>
+    <div class="tab" onclick="switchTab('marketing')">Marketing</div>
+    <div class="tab" onclick="switchTab('brand')">Brand & Design</div>
+  </div>
+
+  <div class="tab-content active" id="tab-products">
+    <table class="task-table">
+      <thead><tr><th>Task</th><th>Status</th><th>Due</th></tr></thead>
+      <tbody>
+        <tr><td>Tasks will be added as the SailPin project ramps up</td><td><span class="badge pending">Pending</span></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tab-content" id="tab-marketing">
+    <table class="task-table">
+      <thead><tr><th>Task</th><th>Status</th><th>Due</th></tr></thead>
+      <tbody>
+        <tr><td>Tasks will be added as the SailPin project ramps up</td><td><span class="badge pending">Pending</span></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tab-content" id="tab-brand">
+    <table class="task-table">
+      <thead><tr><th>Task</th><th>Status</th><th>Due</th></tr></thead>
+      <tbody>
+        <tr><td>Tasks will be added as the SailPin project ramps up</td><td><span class="badge pending">Pending</span></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== MANUAL TASK LOG ===== -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#128203;</span> Manual Task Log</div>
+  <div class="manual-section">
+    <h3>Active Items</h3>
+    <div class="manual-task"><div class="dot in-progress"></div><div class="text">SailPin dashboard deployed to Vercel</div><div class="date">May 17, 2026</div></div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <strong>sailpin Team Dashboard</strong> &bull; Ready About &bull; Last updated May 17, 2026 by Derman via Claude
+</footer>
+</div>
+
+<script>
+// Agenda checkboxes — persist state in localStorage
+function toggleAgenda(cb){
+  const li = cb.closest('.agenda-item');
+  if(cb.checked){
+    li.classList.add('checked');
+  } else {
+    li.classList.remove('checked');
+  }
+  saveAgendaState();
+}
+function saveAgendaState(){
+  const checks = document.querySelectorAll('.agenda-check');
+  const state = Array.from(checks).map(c => c.checked);
+  localStorage.setItem('sp_agenda', JSON.stringify(state));
+}
+function loadAgendaState(){
+  const saved = localStorage.getItem('sp_agenda');
+  if(!saved) return;
+  const state = JSON.parse(saved);
+  const checks = document.querySelectorAll('.agenda-check');
+  checks.forEach((c, i) => {
+    if(state[i]){
+      c.checked = true;
+      c.closest('.agenda-item').classList.add('checked');
+    }
+  });
+}
+loadAgendaState();
+
+// Tab switching
+function switchTab(id){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
