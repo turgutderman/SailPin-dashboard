@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>sailpin — Team Dashboard</title>
+<title>sailpin — Command Dashboard</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -15,27 +15,24 @@
 }
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--sand);color:var(--ink);line-height:1.5}
 
-/* AGENDA CHECKBOXES */
-.agenda-check{width:20px;height:20px;accent-color:var(--pacific);cursor:pointer;flex-shrink:0}
-.agenda-item{transition:.3s}
-.agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
-.agenda-item.checked .agenda-num{background:var(--success) !important;opacity:.6}
-.agenda-item.checked{opacity:.5}
-
-/* EMAIL BUTTON */
-.email-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--coral);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:600;transition:.2s;margin-left:auto}
-.email-btn:hover{background:var(--coral-deep);color:#fff}
-
-/* DASHBOARD */
-#dashboard{display:block}
+/* HEADER */
 header{background:var(--pacific-dark);border-bottom:3px solid var(--coral);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 header h1{color:#fff;font-size:22px;font-weight:700;letter-spacing:-.3px}
 header h1 .pin{color:var(--coral)}
 header .tagline{color:var(--mist);font-size:11px;font-weight:500;font-style:italic;letter-spacing:1.5px;margin-top:2px}
 .header-meta{text-align:right;font-size:12px;color:var(--mist)}
 .header-meta .date{font-weight:600;color:var(--coral-light)}
+.email-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--coral);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:600;transition:.2s;margin-left:auto}
+.email-btn:hover{background:var(--coral-deep);color:#fff}
 
 main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
+
+/* ANNOUNCEMENT BANNER */
+.announcement{padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.announcement.info{background:var(--pacific-mist);color:var(--pacific-dark);border:1px solid var(--pacific-mid)}
+.announcement.warn{background:#FFF3CD;color:#856404;border:1px solid #FFE69C}
+.announcement.success{background:#D1E7DD;color:#0A3622;border:1px solid #A3CFBB}
+.announcement.hidden{display:none}
 
 /* SECTION */
 .section{margin-bottom:32px}
@@ -44,13 +41,31 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 
 /* KPI CARDS */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
-.kpi-card{background:var(--sun-white);border-radius:12px;padding:20px;border-left:4px solid var(--pacific);box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.kpi-card{background:var(--sun-white);border-radius:12px;padding:20px;border-left:4px solid var(--pacific);box-shadow:0 2px 8px rgba(13,47,85,.06);transition:.2s}
 .kpi-card.coral{border-left-color:var(--coral)}
 .kpi-card.mist{border-left-color:var(--pacific-mid)}
 .kpi-card.success{border-left-color:var(--success)}
+.kpi-card.warn{border-left-color:var(--warning)}
+.kpi-card.danger{border-left-color:var(--error)}
 .kpi-card .label{font-size:12px;color:var(--slate);text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .kpi-card .value{font-size:32px;font-weight:700;color:var(--ink);margin:4px 0}
 .kpi-card .detail{font-size:12px;color:var(--slate)}
+
+/* TABS */
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;background:var(--sun-white);border-radius:10px;padding:4px;box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--slate);cursor:pointer;border-radius:8px;transition:.2s;flex:1;text-align:center}
+.tab.active{background:var(--pacific-dark);color:#fff}
+.tab:hover:not(.active){background:var(--sand)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* PROJECT HEALTH CARDS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px}
+.proj-card{background:var(--sun-white);border-radius:12px;padding:18px;box-shadow:0 2px 8px rgba(13,47,85,.06);border-top:4px solid var(--pacific)}
+.proj-card .pname{font-size:14px;font-weight:700;color:var(--pacific-dark);margin-bottom:8px}
+.proj-card .pbar{height:8px;background:var(--linen);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.proj-card .pbar-fill{height:100%;background:var(--success);border-radius:4px;transition:width .5s}
+.proj-card .pstats{font-size:12px;color:var(--slate);display:flex;justify-content:space-between}
 
 /* TASK TABLE */
 .task-table{width:100%;border-collapse:collapse;background:var(--sun-white);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(13,47,85,.06)}
@@ -58,201 +73,396 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .task-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--linen)}
 .task-table tr:last-child td{border:none}
 .task-table tr:hover td{background:var(--sand)}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;text-transform:uppercase}
-.badge.on-track{background:var(--pacific-mist);color:var(--pacific)}
-.badge.in-progress{background:var(--coral-pale);color:var(--coral-deep)}
-.badge.completed{background:#E8F5E9;color:var(--success)}
-.badge.pending{background:var(--linen);color:var(--slate)}
+.overdue{color:var(--error);font-weight:600}
+.due-soon{color:var(--warning);font-weight:600}
+.on-time{color:var(--slate)}
+.project-tag{display:inline-block;background:var(--pacific-mist);color:var(--pacific);font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;margin:1px 2px}
 
-/* MANUAL TASKS */
-.manual-section{background:var(--sun-white);border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(13,47,85,.06)}
-.manual-section h3{font-size:14px;font-weight:700;color:var(--pacific-dark);margin-bottom:12px}
-.manual-task{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--linen);font-size:13px}
-.manual-task:last-child{border:none}
-.manual-task .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.manual-task .dot.pending{background:var(--warning)}
-.manual-task .dot.in-progress{background:var(--info)}
-.manual-task .dot.done{background:var(--success)}
-.manual-task .text{flex:1}
-.manual-task .date{font-size:11px;color:var(--slate)}
+/* PIPELINE */
+.pipeline-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.stage-card{background:var(--sun-white);border-radius:10px;padding:12px 16px;flex:1;min-width:120px;text-align:center;box-shadow:0 2px 8px rgba(13,47,85,.06);border-top:3px solid var(--pacific-mid)}
+.stage-card .sname{font-size:12px;font-weight:700;color:var(--pacific-dark)}
+.stage-card .sprob{font-size:10px;color:var(--slate)}
 
-/* TABS */
-.tab-bar{display:flex;gap:4px;margin-bottom:16px;background:var(--sun-white);border-radius:10px;padding:4px;box-shadow:0 2px 8px rgba(13,47,85,.06)}
-.tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--slate);cursor:pointer;border-radius:8px;transition:.2s}
-.tab.active{background:var(--pacific-dark);color:#fff}
-.tab:hover:not(.active){background:var(--sand)}
-.tab-content{display:none}
-.tab-content.active{display:block}
+/* TAGS CLOUD */
+.tags-cloud{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.tag-pill{background:var(--pacific-mist);color:var(--pacific-dark);font-size:11px;padding:4px 10px;border-radius:12px;font-weight:500}
 
-/* FOOTER */
+/* CONTACTS TABLE */
+.contacts-table{width:100%;border-collapse:collapse;background:var(--sun-white);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(13,47,85,.06)}
+.contacts-table th{background:var(--pacific-dark);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:10px 14px;text-align:left}
+.contacts-table td{padding:8px 14px;font-size:12px;border-bottom:1px solid var(--linen)}
+.contacts-table tr:last-child td{border:none}
+.contacts-table tr:hover td{background:var(--sand)}
+
+/* CALL AGENDA */
+.agenda-box{background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px}
+.agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:center;gap:10px}
+.agenda-item:last-child{border:none}
+.agenda-check{width:20px;height:20px;accent-color:var(--pacific);cursor:pointer;flex-shrink:0}
+.agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
+.agenda-item.checked{opacity:.5}
+.agenda-num{background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+
+/* NOTES */
+.notes-box{background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--coral);margin-bottom:24px}
+.note-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px}
+.note-item:last-child{border:none}
+.note-item .note-title{font-weight:700;color:var(--pacific-dark)}
+.note-item .note-date{font-size:11px;color:var(--slate)}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--slate);font-size:14px}
+.spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--linen);border-top-color:var(--pacific);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-box{background:#FCE4E4;border:1px solid var(--error);color:var(--error);padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:16px}
+
+/* STATUS BADGE */
+.status-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.status-dot.green{background:var(--success)}
+.status-dot.yellow{background:var(--warning)}
+.status-dot.red{background:var(--error)}
+
 footer{text-align:center;padding:24px;font-size:12px;color:var(--slate);border-top:1px solid var(--sand-dark);margin-top:32px}
 footer strong{color:var(--pacific-dark)}
 
-/* RESPONSIVE */
 @media(max-width:768px){
   header{flex-direction:column;gap:8px;text-align:center}
   .kpi-grid{grid-template-columns:1fr 1fr}
+  .pipeline-row{flex-direction:column}
+  .tab{padding:8px 12px;font-size:12px}
 }
 </style>
 </head>
 <body>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="visible">
 <header>
   <div>
-    <h1>sail<span class="pin">pin</span> — Team Dashboard</h1>
+    <h1>sail<span class="pin">pin</span> — Command Dashboard</h1>
     <div class="tagline">Ready About</div>
   </div>
   <a href="mailto:turgutderman@gmail.com?subject=SailPin%20Dashboard%20Update" class="email-btn">&#9993; Email Derman</a>
   <div class="header-meta">
-    <div class="date">Last Updated: May 17, 2026</div>
-    <div>Updated by Derman via Claude</div>
+    <div class="date" id="header-date">Loading...</div>
+    <div id="header-by">Updated by Derman via Claude</div>
   </div>
 </header>
 
 <main>
 
-<!-- ===== TODAY'S CALL AGENDA ===== -->
-<div class="section" style="background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px">
-  <div class="section-title" style="border-bottom:none;margin-bottom:12px"><span class="icon">&#127909;</span> Today's Call Agenda — May 17, 2026</div>
-  <ol style="list-style:none;padding:0;margin:0" id="agenda-list">
-    <li class="agenda-item" style="padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:center;gap:10px">
-      <input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)">
-      <span class="agenda-num" style="background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">1</span>
-      <span class="agenda-text"><strong style="color:var(--ink)">Agenda items will be added here</strong></span>
-    </li>
-  </ol>
+<!-- ANNOUNCEMENT -->
+<div class="announcement hidden" id="announcement"></div>
+
+<!-- MAIN TABS -->
+<div class="tab-bar" id="main-tabs">
+  <div class="tab active" data-tab="overview">Overview</div>
+  <div class="tab" data-tab="ghl">GHL CRM</div>
+  <div class="tab" data-tab="asana">Asana Tasks</div>
+  <div class="tab" data-tab="updates">Updates & Agenda</div>
 </div>
 
-<!-- ===== DERMAN'S UPDATES ===== -->
-<div class="section" style="background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--coral);margin-bottom:32px">
-  <div class="section-title" style="border-bottom:none;margin-bottom:12px"><span class="icon">&#9733;</span> Derman's Updates</div>
-  <ul style="list-style:none;padding:0;margin:0">
-    <li style="padding:10px 0;font-size:14px;display:flex;align-items:baseline;gap:10px">
-      <span style="color:var(--coral);font-size:16px;line-height:1">&#9679;</span>
-      <span><strong style="color:var(--pacific)">SailPin dashboard created and deployed to Vercel</strong> <span style="font-size:12px;color:var(--slate)">— May 17, 2026</span></span>
-    </li>
-  </ul>
-</div>
+<!-- ===== OVERVIEW TAB ===== -->
+<div class="tab-panel active" id="panel-overview">
+  <div class="kpi-grid" id="overview-kpis">
+    <div class="kpi-card"><div class="label">Loading...</div><div class="value">—</div></div>
+  </div>
 
-<!-- ===== KEY METRICS ===== -->
-<div class="section">
-  <div class="section-title"><span class="icon">&#9670;</span> Key Metrics</div>
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="label">Printful Products</div>
-      <div class="value">—</div>
-      <div class="detail">Connect Printful to populate</div>
-    </div>
-    <div class="kpi-card coral">
-      <div class="label">Shopify Orders</div>
-      <div class="value">—</div>
-      <div class="detail">Connect Shopify to populate</div>
-    </div>
-    <div class="kpi-card mist">
-      <div class="label">Social Followers</div>
-      <div class="value">—</div>
-      <div class="detail">Across all platforms</div>
-    </div>
-    <div class="kpi-card success">
-      <div class="label">Revenue MTD</div>
-      <div class="value">—</div>
-      <div class="detail">Month to date</div>
-    </div>
+  <div class="section-title"><span class="icon">&#9881;</span> Project Health</div>
+  <div class="projects-grid" id="project-cards">
+    <div class="loading"><div class="spinner"></div><br>Loading projects...</div>
+  </div>
+
+  <div class="section-title"><span class="icon">&#9888;</span> Overdue Tasks</div>
+  <div id="overview-overdue">
+    <div class="loading"><div class="spinner"></div><br>Loading overdue tasks...</div>
   </div>
 </div>
 
-<!-- ===== TASK TRACKER ===== -->
-<div class="section">
-  <div class="section-title"><span class="icon">&#9745;</span> Task Tracker — SailPin Projects</div>
-  <div class="tab-bar">
-    <div class="tab active" onclick="switchTab('products')">Products & PoD</div>
-    <div class="tab" onclick="switchTab('marketing')">Marketing</div>
-    <div class="tab" onclick="switchTab('brand')">Brand & Design</div>
+<!-- ===== GHL TAB ===== -->
+<div class="tab-panel" id="panel-ghl">
+  <div class="section-title"><span class="icon">&#9670;</span> Marketing Pipeline</div>
+  <div class="pipeline-row" id="pipeline-stages">
+    <div class="loading"><div class="spinner"></div><br>Loading pipeline...</div>
   </div>
 
-  <div class="tab-content active" id="tab-products">
-    <table class="task-table">
-      <thead><tr><th>Task</th><th>Status</th><th>Due</th></tr></thead>
-      <tbody>
-        <tr><td>Tasks will be added as the SailPin project ramps up</td><td><span class="badge pending">Pending</span></td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="section-title"><span class="icon">&#9670;</span> CRM Metrics</div>
+  <div class="kpi-grid" id="ghl-kpis"></div>
 
-  <div class="tab-content" id="tab-marketing">
-    <table class="task-table">
-      <thead><tr><th>Task</th><th>Status</th><th>Due</th></tr></thead>
-      <tbody>
-        <tr><td>Tasks will be added as the SailPin project ramps up</td><td><span class="badge pending">Pending</span></td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="section-title"><span class="icon">&#9670;</span> Contact Tags</div>
+  <div class="tags-cloud" id="tags-cloud"></div>
 
-  <div class="tab-content" id="tab-brand">
-    <table class="task-table">
-      <thead><tr><th>Task</th><th>Status</th><th>Due</th></tr></thead>
-      <tbody>
-        <tr><td>Tasks will be added as the SailPin project ramps up</td><td><span class="badge pending">Pending</span></td><td>—</td></tr>
-      </tbody>
-    </table>
+  <div class="section-title"><span class="icon">&#9670;</span> Recent Contacts</div>
+  <div id="contacts-table">
+    <div class="loading"><div class="spinner"></div><br>Loading contacts...</div>
   </div>
 </div>
 
-<!-- ===== MANUAL TASK LOG ===== -->
-<div class="section">
-  <div class="section-title"><span class="icon">&#128203;</span> Manual Task Log</div>
-  <div class="manual-section">
-    <h3>Active Items</h3>
-    <div class="manual-task"><div class="dot in-progress"></div><div class="text">SailPin dashboard deployed to Vercel</div><div class="date">May 17, 2026</div></div>
+<!-- ===== ASANA TAB ===== -->
+<div class="tab-panel" id="panel-asana">
+  <div class="section-title"><span class="icon">&#128308;</span> Overdue Tasks</div>
+  <div id="asana-overdue">
+    <div class="loading"><div class="spinner"></div><br>Loading...</div>
+  </div>
+
+  <div class="section-title"><span class="icon">&#128992;</span> Upcoming (Next 14 Days)</div>
+  <div id="asana-upcoming">
+    <div class="loading"><div class="spinner"></div><br>Loading...</div>
+  </div>
+
+  <div class="section-title"><span class="icon">&#9744;</span> Unscheduled Tasks (No Due Date)</div>
+  <div id="asana-nodue">
+    <div class="loading"><div class="spinner"></div><br>Loading...</div>
+  </div>
+</div>
+
+<!-- ===== UPDATES & AGENDA TAB ===== -->
+<div class="tab-panel" id="panel-updates">
+  <div class="section-title"><span class="icon">&#127909;</span> Call Agenda</div>
+  <div class="agenda-box" id="agenda-box">
+    <div class="loading"><div class="spinner"></div><br>Loading agenda...</div>
+  </div>
+
+  <div class="section-title"><span class="icon">&#128204;</span> Pinned Notes</div>
+  <div class="notes-box" id="pinned-notes">
+    <div class="loading"><div class="spinner"></div><br>Loading notes...</div>
+  </div>
+
+  <div class="section-title"><span class="icon">&#128994;</span> Status Updates</div>
+  <div id="status-updates">
+    <div class="loading"><div class="spinner"></div><br>Loading...</div>
   </div>
 </div>
 
 </main>
 
 <footer>
-  <strong>sailpin Team Dashboard</strong> &bull; Ready About &bull; Last updated May 17, 2026 by Derman via Claude
+  <strong>sailpin Command Dashboard</strong> &bull; Ready About &bull;
+  Data refreshes hourly &bull; <span id="footer-fetched">Loading...</span>
 </footer>
-</div>
 
 <script>
-// Agenda checkboxes — persist state in localStorage
-function toggleAgenda(cb){
-  const li = cb.closest('.agenda-item');
-  if(cb.checked){
-    li.classList.add('checked');
-  } else {
-    li.classList.remove('checked');
+const TODAY = new Date().toISOString().split('T')[0];
+
+// ===== TAB SWITCHING =====
+document.querySelectorAll('#main-tabs .tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('#main-tabs .tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('panel-' + this.dataset.tab).classList.add('active');
+  });
+});
+
+// ===== HELPERS =====
+function daysFrom(dateStr) {
+  if (!dateStr) return null;
+  return Math.floor((new Date(TODAY) - new Date(dateStr)) / 86400000);
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function dueCls(d) {
+  if (!d) return 'on-time';
+  const diff = daysFrom(d);
+  if (diff > 0) return 'overdue';
+  if (diff >= -3) return 'due-soon';
+  return 'on-time';
+}
+
+function dueLabel(d) {
+  if (!d) return '—';
+  const diff = daysFrom(d);
+  if (diff > 0) return fmtDate(d) + ' (' + diff + 'd overdue)';
+  if (diff === 0) return fmtDate(d) + ' (today)';
+  if (diff >= -3) return fmtDate(d) + ' (in ' + Math.abs(diff) + 'd)';
+  return fmtDate(d);
+}
+
+function taskTable(tasks, containerId) {
+  const el = document.getElementById(containerId);
+  if (!tasks || !tasks.length) {
+    el.innerHTML = '<p style="color:var(--slate);font-size:13px;padding:12px;">No tasks found.</p>';
+    return;
   }
+  let html = '<table class="task-table"><thead><tr><th>Task</th><th>Due</th><th>Project</th></tr></thead><tbody>';
+  tasks.forEach(t => {
+    const cls = dueCls(t.due_on);
+    const projs = (t.projects || []).map(p => '<span class="project-tag">' + p.replace('SailPin: ','') + '</span>').join(' ') || '—';
+    html += '<tr><td>' + (t.name || '—') + '</td><td class="' + cls + '">' + dueLabel(t.due_on) + '</td><td>' + projs + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+// ===== DATA FETCHING =====
+let ghl = null, asana = null, content = null;
+
+async function fetchAll() {
+  const results = await Promise.allSettled([
+    fetch('/api/ghl').then(r => r.json()),
+    fetch('/api/asana').then(r => r.json()),
+    fetch('/dashboard-content.json?' + Date.now()).then(r => r.json())
+  ]);
+
+  if (results[0].status === 'fulfilled' && !results[0].value.error) ghl = results[0].value;
+  else document.getElementById('ghl-kpis').innerHTML = '<div class="error-box">GHL data unavailable. Check API key in Vercel settings.</div>';
+
+  if (results[1].status === 'fulfilled' && !results[1].value.error) asana = results[1].value;
+  else document.getElementById('asana-overdue').innerHTML = '<div class="error-box">Asana data unavailable. Check API token in Vercel settings.</div>';
+
+  if (results[2].status === 'fulfilled') content = results[2].value;
+
+  renderAll();
+}
+
+// ===== RENDERERS =====
+function renderAll() {
+  // Header
+  const fetchTime = ghl?.fetchedAt || asana?.fetchedAt || new Date().toISOString();
+  const dt = new Date(fetchTime);
+  document.getElementById('header-date').textContent = 'Data as of: ' + dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+  document.getElementById('header-by').textContent = content?.lastUpdatedBy || 'Updated by Derman via Claude';
+  document.getElementById('footer-fetched').textContent = 'Last data fetch: ' + dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+  // Announcement
+  if (content?.announcement?.show) {
+    const ann = document.getElementById('announcement');
+    ann.className = 'announcement ' + (content.announcement.type || 'info');
+    ann.textContent = content.announcement.text;
+  }
+
+  renderOverview();
+  renderGHL();
+  renderAsana();
+  renderUpdates();
+}
+
+function renderOverview() {
+  // KPI cards
+  const totalContacts = ghl?.contacts?.total || 0;
+  const totalOpps = ghl?.opportunities?.total || 0;
+  const totalIncomplete = asana?.summary?.totalIncomplete || 0;
+  const totalComplete = asana?.summary?.totalComplete || 0;
+  const overdueCount = asana?.summary?.overdueCount || 0;
+
+  document.getElementById('overview-kpis').innerHTML = [
+    { label: 'GHL Contacts', value: totalContacts.toLocaleString(), detail: 'Total in CRM database', cls: '' },
+    { label: 'Opportunities', value: totalOpps, detail: 'Active in pipeline', cls: 'mist' },
+    { label: 'Open Tasks', value: totalIncomplete, detail: totalComplete + ' completed', cls: 'coral' },
+    { label: 'Overdue', value: overdueCount, detail: overdueCount > 0 ? 'Needs attention now' : 'All clear', cls: overdueCount > 0 ? 'danger' : 'success' }
+  ].map(m => '<div class="kpi-card ' + m.cls + '"><div class="label">' + m.label + '</div><div class="value">' + m.value + '</div><div class="detail">' + m.detail + '</div></div>').join('');
+
+  // Project health cards
+  if (asana?.projects) {
+    document.getElementById('project-cards').innerHTML = asana.projects.map(p => {
+      const pct = p.total > 0 ? Math.round((p.completed / p.total) * 100) : 0;
+      return '<div class="proj-card"><div class="pname">' + p.name.replace('SailPin: ','') + '</div><div class="pbar"><div class="pbar-fill" style="width:' + pct + '%"></div></div><div class="pstats"><span>' + p.completed + '/' + p.total + ' tasks</span><span>' + pct + '%</span></div></div>';
+    }).join('');
+  }
+
+  // Overdue preview
+  if (asana?.overdueTasks) {
+    taskTable(asana.overdueTasks.slice(0, 15), 'overview-overdue');
+  }
+}
+
+function renderGHL() {
+  if (!ghl) return;
+
+  // Pipeline stages
+  document.getElementById('pipeline-stages').innerHTML = ghl.pipeline.stages.map(s =>
+    '<div class="stage-card"><div class="sname">' + s.name + '</div><div class="sprob">' + s.probability + '% win prob</div></div>'
+  ).join('');
+
+  // KPIs
+  document.getElementById('ghl-kpis').innerHTML = [
+    { label: 'Total Contacts', value: ghl.contacts.total.toLocaleString(), detail: 'In GHL database', cls: '' },
+    { label: 'Opportunities', value: ghl.opportunities.total, detail: 'All statuses', cls: 'mist' },
+    { label: 'Tags', value: ghl.tags.length, detail: 'Active contact tags', cls: 'coral' },
+    { label: 'Pipeline Stages', value: ghl.pipeline.stages.length, detail: ghl.pipeline.name, cls: 'success' }
+  ].map(m => '<div class="kpi-card ' + m.cls + '"><div class="label">' + m.label + '</div><div class="value">' + m.value + '</div><div class="detail">' + m.detail + '</div></div>').join('');
+
+  // Tags
+  document.getElementById('tags-cloud').innerHTML = ghl.tags.map(t =>
+    '<span class="tag-pill">' + t + '</span>'
+  ).join('');
+
+  // Recent contacts
+  let cHtml = '<table class="contacts-table"><thead><tr><th>Name</th><th>Email</th><th>Tags</th><th>Added</th></tr></thead><tbody>';
+  ghl.contacts.list.forEach(c => {
+    const tags = c.tags.length ? c.tags.map(t => '<span class="project-tag">' + t + '</span>').join(' ') : '—';
+    const added = c.dateAdded ? new Date(c.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+    cHtml += '<tr><td>' + c.name + '</td><td>' + (c.email || '—') + '</td><td>' + tags + '</td><td>' + added + '</td></tr>';
+  });
+  cHtml += '</tbody></table>';
+  document.getElementById('contacts-table').innerHTML = cHtml;
+}
+
+function renderAsana() {
+  if (!asana) return;
+  taskTable(asana.overdueTasks, 'asana-overdue');
+  taskTable(asana.upcomingTasks, 'asana-upcoming');
+  taskTable(asana.noDueTasks, 'asana-nodue');
+}
+
+function renderUpdates() {
+  if (!content) return;
+
+  // Call agenda
+  if (content.callAgenda?.items?.length) {
+    let html = '<div style="font-size:12px;color:var(--slate);margin-bottom:10px">Agenda for ' + content.callAgenda.date + '</div>';
+    content.callAgenda.items.forEach((item, i) => {
+      html += '<div class="agenda-item"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + (i+1) + '</span><span class="agenda-text"><strong>' + item + '</strong></span></div>';
+    });
+    document.getElementById('agenda-box').innerHTML = html;
+    loadAgendaState();
+  } else {
+    document.getElementById('agenda-box').innerHTML = '<p style="color:var(--slate);font-size:13px;">No agenda items set.</p>';
+  }
+
+  // Pinned notes
+  if (content.pinnedNotes?.length) {
+    document.getElementById('pinned-notes').innerHTML = content.pinnedNotes.map(n =>
+      '<div class="note-item"><div class="note-title">' + n.title + '</div><div>' + n.text + '</div><div class="note-date">' + n.date + '</div></div>'
+    ).join('');
+  } else {
+    document.getElementById('pinned-notes').innerHTML = '<p style="color:var(--slate);font-size:13px;">No pinned notes.</p>';
+  }
+
+  // Status updates
+  if (content.statusUpdates?.length) {
+    let html = '';
+    content.statusUpdates.forEach(s => {
+      html += '<div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--linen);font-size:13px"><span class="status-dot ' + s.status + '"></span><strong>' + s.project + '</strong> — ' + s.note + ' <span style="font-size:11px;color:var(--slate);margin-left:auto">' + s.date + '</span></div>';
+    });
+    document.getElementById('status-updates').innerHTML = '<div style="background:var(--sun-white);border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(13,47,85,.06)">' + html + '</div>';
+  }
+}
+
+// ===== AGENDA PERSISTENCE =====
+function toggleAgenda(cb) {
+  const li = cb.closest('.agenda-item');
+  li.classList.toggle('checked', cb.checked);
   saveAgendaState();
 }
-function saveAgendaState(){
+function saveAgendaState() {
   const checks = document.querySelectorAll('.agenda-check');
-  const state = Array.from(checks).map(c => c.checked);
-  localStorage.setItem('sp_agenda', JSON.stringify(state));
+  localStorage.setItem('sp_agenda', JSON.stringify(Array.from(checks).map(c => c.checked)));
 }
-function loadAgendaState(){
-  const saved = localStorage.getItem('sp_agenda');
-  if(!saved) return;
-  const state = JSON.parse(saved);
-  const checks = document.querySelectorAll('.agenda-check');
-  checks.forEach((c, i) => {
-    if(state[i]){
-      c.checked = true;
-      c.closest('.agenda-item').classList.add('checked');
-    }
-  });
+function loadAgendaState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('sp_agenda') || '[]');
+    document.querySelectorAll('.agenda-check').forEach((c, i) => {
+      if (saved[i]) { c.checked = true; c.closest('.agenda-item').classList.add('checked'); }
+    });
+  } catch(e) {}
 }
-loadAgendaState();
 
-// Tab switching
-function switchTab(id){
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  event.target.classList.add('active');
-}
+// ===== INIT =====
+fetchAll();
 </script>
 </body>
 </html>

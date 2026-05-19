@@ -1,0 +1,32 @@
+{
+  "lastUpdatedBy": "Derman via Claude",
+  "lastUpdated": "2026-05-19",
+  "announcement": {
+    "show": true,
+    "type": "info",
+    "text": "Dashboard upgraded to live data — GHL + Asana refresh hourly."
+  },
+  "callAgenda": {
+    "date": "2026-05-19",
+    "items": [
+      "Review SailPin dashboard live data setup",
+      "Check overdue Asana tasks and triage",
+      "GHL pipeline status review"
+    ]
+  },
+  "pinnedNotes": [
+    {
+      "title": "Dashboard Live",
+      "text": "GHL contacts, pipeline, and Asana tasks now pull automatically every hour.",
+      "date": "2026-05-19"
+    }
+  ],
+  "statusUpdates": [
+    {
+      "project": "SailPin Dashboard",
+      "status": "green",
+      "note": "Vercel serverless API routes deployed. GHL + Asana data flowing.",
+      "date": "2026-05-19"
+    }
+  ]
+}
