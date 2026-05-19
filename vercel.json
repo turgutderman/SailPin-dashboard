@@ -3,11 +3,6 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "cleanUrls": true,
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node@3.0.0"
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
