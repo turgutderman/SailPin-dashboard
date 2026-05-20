@@ -302,11 +302,12 @@ function taskTable(tasks, containerId) {
     el.innerHTML = '<p style="color:var(--slate);font-size:13px;padding:12px;">No tasks found.</p>';
     return;
   }
-  let html = '<table class="task-table"><thead><tr><th>Task</th><th>Due</th><th>Project</th></tr></thead><tbody>';
+  let html = '<table class="task-table"><thead><tr><th>Task</th><th>Assigned To</th><th>Due</th><th>Project</th></tr></thead><tbody>';
   tasks.forEach(t => {
     const cls = dueCls(t.due_on);
     const projs = (t.projects || []).map(p => '<span class="project-tag">' + p.replace('SailPin: ','') + '</span>').join(' ') || '—';
-    html += '<tr><td>' + (t.name || '—') + '</td><td class="' + cls + '">' + dueLabel(t.due_on) + '</td><td>' + projs + '</td></tr>';
+    const assignee = t.assignee || '<span style="color:var(--mist)">Unassigned</span>';
+    html += '<tr><td>' + (t.name || '—') + '</td><td>' + assignee + '</td><td class="' + cls + '">' + dueLabel(t.due_on) + '</td><td>' + projs + '</td></tr>';
   });
   html += '</tbody></table>';
   el.innerHTML = html;
