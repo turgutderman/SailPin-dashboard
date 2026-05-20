@@ -10,7 +10,8 @@
     "date": "2026-05-20",
     "items": [
       "Workflows are up and in place — confirm all running correctly",
-      "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first"
+      "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first",
+      "Auto-publish endpoint is live — agenda updates now flow directly from Claude"
     ]
   },
   "pinnedNotes": [
@@ -18,14 +19,19 @@
       "title": "Dashboard Live",
       "text": "GHL contacts, pipeline, and Asana tasks now pull automatically every hour.",
       "date": "2026-05-19"
+    },
+    {
+      "title": "Auto-Publish Active",
+      "text": "Dashboard content can now be updated by dictating to Claude — no terminal or git needed.",
+      "date": "2026-05-20"
     }
   ],
   "statusUpdates": [
     {
       "project": "SailPin Dashboard",
       "status": "green",
-      "note": "Vercel serverless API routes deployed. GHL + Asana data flowing.",
-      "date": "2026-05-19"
+      "note": "Vercel serverless API routes deployed. GHL + Asana data flowing. Auto-publish endpoint active.",
+      "date": "2026-05-20"
     }
   ]
-} 
+}
