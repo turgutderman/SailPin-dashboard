@@ -12,7 +12,8 @@
       "Workflows are up and in place — confirm all running correctly",
       "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first",
       "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
-      "[MirthPlus] Separate MirthPlus contacts from SailPin contacts — re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) out of SailPin and into MirthPlus"
+      "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
+      "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus"
     ]
   },
   "pinnedNotes": [
