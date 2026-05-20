@@ -123,6 +123,11 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .status-dot.yellow{background:var(--warning)}
 .status-dot.red{background:var(--error)}
 
+/* TOP UPDATES BLOCK */
+#top-updates{margin-bottom:28px;padding-bottom:24px;border-bottom:2px solid var(--sand-dark)}
+.updates-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.updates-col{min-width:0}
+
 footer{text-align:center;padding:24px;font-size:12px;color:var(--slate);border-top:1px solid var(--sand-dark);margin-top:32px}
 footer strong{color:var(--pacific-dark)}
 
@@ -131,6 +136,7 @@ footer strong{color:var(--pacific-dark)}
   .kpi-grid{grid-template-columns:1fr 1fr}
   .pipeline-row{flex-direction:column}
   .tab{padding:8px 12px;font-size:12px}
+  .updates-row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -153,12 +159,34 @@ footer strong{color:var(--pacific-dark)}
 <!-- ANNOUNCEMENT -->
 <div class="announcement hidden" id="announcement"></div>
 
+<!-- ===== UPDATES & AGENDA (always visible at top) ===== -->
+<div id="top-updates">
+  <div class="section-title"><span class="icon">&#127909;</span> Call Agenda</div>
+  <div class="agenda-box" id="agenda-box">
+    <div class="loading"><div class="spinner"></div><br>Loading agenda...</div>
+  </div>
+
+  <div class="updates-row">
+    <div class="updates-col">
+      <div class="section-title"><span class="icon">&#128204;</span> Pinned Notes</div>
+      <div class="notes-box" id="pinned-notes">
+        <div class="loading"><div class="spinner"></div><br>Loading notes...</div>
+      </div>
+    </div>
+    <div class="updates-col">
+      <div class="section-title"><span class="icon">&#128994;</span> Status Updates</div>
+      <div id="status-updates">
+        <div class="loading"><div class="spinner"></div><br>Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MAIN TABS -->
 <div class="tab-bar" id="main-tabs">
   <div class="tab active" data-tab="overview">Overview</div>
   <div class="tab" data-tab="ghl">GHL CRM</div>
   <div class="tab" data-tab="asana">Asana Tasks</div>
-  <div class="tab" data-tab="updates">Updates & Agenda</div>
 </div>
 
 <!-- ===== OVERVIEW TAB ===== -->
@@ -215,23 +243,6 @@ footer strong{color:var(--pacific-dark)}
   </div>
 </div>
 
-<!-- ===== UPDATES & AGENDA TAB ===== -->
-<div class="tab-panel" id="panel-updates">
-  <div class="section-title"><span class="icon">&#127909;</span> Call Agenda</div>
-  <div class="agenda-box" id="agenda-box">
-    <div class="loading"><div class="spinner"></div><br>Loading agenda...</div>
-  </div>
-
-  <div class="section-title"><span class="icon">&#128204;</span> Pinned Notes</div>
-  <div class="notes-box" id="pinned-notes">
-    <div class="loading"><div class="spinner"></div><br>Loading notes...</div>
-  </div>
-
-  <div class="section-title"><span class="icon">&#128994;</span> Status Updates</div>
-  <div id="status-updates">
-    <div class="loading"><div class="spinner"></div><br>Loading...</div>
-  </div>
-</div>
 
 </main>
 
