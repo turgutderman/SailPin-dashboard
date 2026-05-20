@@ -107,6 +107,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
 .agenda-item.checked{opacity:.5}
 .agenda-num{background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.asana-badge{margin-left:auto;font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default;title:Synced to Asana}
 
 /* NOTES */
 .notes-box{background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--coral);margin-bottom:24px}
@@ -431,11 +432,13 @@ function linkify(text) {
 function renderUpdates() {
   if (!content) return;
 
-  // Call agenda
+  // Call agenda (supports both string items and {text, asanaGid} objects)
   if (content.callAgenda?.items?.length) {
     let html = '<div style="font-size:12px;color:var(--slate);margin-bottom:10px">Agenda for ' + content.callAgenda.date + '</div>';
     content.callAgenda.items.forEach((item, i) => {
-      html += '<div class="agenda-item"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + (i+1) + '</span><span class="agenda-text"><strong>' + linkify(item) + '</strong></span></div>';
+      const text = typeof item === 'string' ? item : item.text;
+      const gid = typeof item === 'object' ? item.asanaGid : '';
+      html += '<div class="agenda-item" data-gid="' + (gid || '') + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + (i+1) + '</span><span class="agenda-text"><strong>' + linkify(text) + '</strong></span>' + (gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
     });
     document.getElementById('agenda-box').innerHTML = html;
     loadAgendaState();
@@ -462,11 +465,29 @@ function renderUpdates() {
   }
 }
 
-// ===== AGENDA PERSISTENCE =====
+// ===== AGENDA PERSISTENCE + ASANA SYNC =====
 function toggleAgenda(cb) {
   const li = cb.closest('.agenda-item');
   li.classList.toggle('checked', cb.checked);
   saveAgendaState();
+
+  // Sync to Asana if linked
+  const gid = li.dataset.gid;
+  if (gid) {
+    const badge = li.querySelector('.asana-badge');
+    if (badge) badge.textContent = '⏳';
+    fetch('/api/agenda-complete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taskGid: gid, completed: cb.checked })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (badge) badge.textContent = data.success ? '✓' : '⚠';
+      if (badge && data.success) setTimeout(() => badge.textContent = '⚙', 2000);
+    })
+    .catch(() => { if (badge) badge.textContent = '⚠'; });
+  }
 }
 function saveAgendaState() {
   const checks = document.querySelectorAll('.agenda-check');
