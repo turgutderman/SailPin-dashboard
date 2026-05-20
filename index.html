@@ -419,6 +419,10 @@ function renderAsana() {
   taskTable(asana.noDueTasks, 'asana-nodue');
 }
 
+function linkify(text) {
+  return text.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--pacific-mid);word-break:break-all">$1</a>');
+}
+
 function renderUpdates() {
   if (!content) return;
 
@@ -426,7 +430,7 @@ function renderUpdates() {
   if (content.callAgenda?.items?.length) {
     let html = '<div style="font-size:12px;color:var(--slate);margin-bottom:10px">Agenda for ' + content.callAgenda.date + '</div>';
     content.callAgenda.items.forEach((item, i) => {
-      html += '<div class="agenda-item"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + (i+1) + '</span><span class="agenda-text"><strong>' + item + '</strong></span></div>';
+      html += '<div class="agenda-item"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + (i+1) + '</span><span class="agenda-text"><strong>' + linkify(item) + '</strong></span></div>';
     });
     document.getElementById('agenda-box').innerHTML = html;
     loadAgendaState();
@@ -437,7 +441,7 @@ function renderUpdates() {
   // Pinned notes
   if (content.pinnedNotes?.length) {
     document.getElementById('pinned-notes').innerHTML = content.pinnedNotes.map(n =>
-      '<div class="note-item"><div class="note-title">' + n.title + '</div><div>' + n.text + '</div><div class="note-date">' + n.date + '</div></div>'
+      '<div class="note-item"><div class="note-title">' + n.title + '</div><div>' + linkify(n.text) + '</div><div class="note-date">' + n.date + '</div></div>'
     ).join('');
   } else {
     document.getElementById('pinned-notes').innerHTML = '<p style="color:var(--slate);font-size:13px;">No pinned notes.</p>';
