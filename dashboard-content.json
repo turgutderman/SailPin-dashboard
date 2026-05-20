@@ -6,18 +6,46 @@
     "type": "info",
     "text": "Dashboard upgraded to live data — GHL + Asana refresh hourly."
   },
+  "asanaAgendaProject": "1214978656234047",
   "callAgenda": {
     "date": "2026-05-20",
     "items": [
-      "[MirthPlus] Insomniac Brothers",
-      "[MirthPlus] End date for roll-on product — pulling it back",
-      "Discuss with Bonnie and Frances — additional items for today",
-      "Workflows are up and in place — confirm all running correctly",
-      "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first",
-      "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
-      "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
-      "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
-      "[SailPin] Explore Printful All-Over Print collection for PoD products — https://www.printful.com/custom/collections/all-over-print"
+      {
+        "text": "[MirthPlus] Insomniac Brothers",
+        "asanaGid": "1214978421773717"
+      },
+      {
+        "text": "[MirthPlus] End date for roll-on product — pulling it back",
+        "asanaGid": "1214978379496738"
+      },
+      {
+        "text": "Discuss with Bonnie and Frances — additional items for today",
+        "asanaGid": "1214978421732855"
+      },
+      {
+        "text": "Workflows are up and in place — confirm all running correctly",
+        "asanaGid": "1214978219699164"
+      },
+      {
+        "text": "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first",
+        "asanaGid": "1214978379377696"
+      },
+      {
+        "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
+        "asanaGid": "1214978576518724"
+      },
+      {
+        "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
+        "asanaGid": "1214978421595348"
+      },
+      {
+        "text": "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
+        "asanaGid": "1214978421660686"
+      },
+      {
+        "text": "[SailPin] Explore Printful All-Over Print collection for PoD products — https://www.printful.com/custom/collections/all-over-print",
+        "asanaGid": "1214978379426417"
+      }
     ]
   },
   "pinnedNotes": [
