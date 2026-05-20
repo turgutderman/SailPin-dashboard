@@ -1,17 +1,16 @@
 {
   "lastUpdatedBy": "Derman via Claude",
-  "lastUpdated": "2026-05-19",
+  "lastUpdated": "2026-05-20",
   "announcement": {
     "show": true,
     "type": "info",
     "text": "Dashboard upgraded to live data — GHL + Asana refresh hourly."
   },
   "callAgenda": {
-    "date": "2026-05-19",
+    "date": "2026-05-20",
     "items": [
-      "Review SailPin dashboard live data setup",
-      "Check overdue Asana tasks and triage",
-      "GHL pipeline status review"
+      "Workflows are up and in place — confirm all running correctly",
+      "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first"
     ]
   },
   "pinnedNotes": [
