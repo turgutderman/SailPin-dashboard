@@ -9,6 +9,8 @@
   "callAgenda": {
     "date": "2026-05-20",
     "items": [
+      "[MirthPlus] Insomniac Brothers",
+      "[MirthPlus] End date for roll-on product — pulling it back",
       "Workflows are up and in place — confirm all running correctly",
       "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first",
       "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
