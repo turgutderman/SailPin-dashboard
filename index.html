@@ -56,9 +56,9 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .tab{padding:12px 24px;font-size:14px;font-weight:700;color:var(--pacific-mist);cursor:pointer;border-radius:8px;transition:.2s;flex:1;text-align:center;letter-spacing:.3px;border:1px solid transparent}
 .tab.active{color:#fff}
 .tab:hover:not(.active){background:rgba(255,255,255,.1);color:#fff}
-.tab[data-tab="overview"].active{background:var(--coral);box-shadow:0 2px 8px rgba(232,96,58,.3);border-color:var(--coral-light)}
-.tab[data-tab="ghl"].active{background:var(--success);box-shadow:0 2px 8px rgba(61,139,94,.3);border-color:#5aad7a}
-.tab[data-tab="asana"].active{background:var(--pacific-mid);box-shadow:0 2px 8px rgba(46,109,180,.3);border-color:#5a9ad5}
+.tab.tab-overview.active{background:#E8603A;box-shadow:0 2px 8px rgba(232,96,58,.3);border-color:#F28B6B}
+.tab.tab-ghl.active{background:#3D8B5E;box-shadow:0 2px 8px rgba(61,139,94,.3);border-color:#5aad7a}
+.tab.tab-asana.active{background:#2E6DB4;box-shadow:0 2px 8px rgba(46,109,180,.3);border-color:#5a9ad5}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
@@ -187,9 +187,9 @@ footer strong{color:var(--pacific-dark)}
 
 <!-- MAIN TABS -->
 <div class="tab-bar" id="main-tabs">
-  <div class="tab active" data-tab="overview">Overview</div>
-  <div class="tab" data-tab="ghl">GHL CRM</div>
-  <div class="tab" data-tab="asana">Asana Tasks</div>
+  <div class="tab tab-overview active" data-tab="overview">Overview</div>
+  <div class="tab tab-ghl" data-tab="ghl">GHL CRM</div>
+  <div class="tab tab-asana" data-tab="asana">Asana Tasks</div>
 </div>
 
 <!-- ===== OVERVIEW TAB ===== -->
