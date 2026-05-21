@@ -96,12 +96,14 @@ export default async function handler(req, res) {
     const oldFingerprint = JSON.stringify(oldItems.map(i => ({
       text: typeof i === 'string' ? i : i.text,
       gid: i.asanaGid || '',
+      date: i.date || null,
       completed: i.completed || false
     })).sort((a, b) => a.gid.localeCompare(b.gid)));
 
     const newFingerprint = JSON.stringify(newItems.map(i => ({
       text: i.text,
       gid: i.asanaGid,
+      date: i.date || null,
       completed: i.completed || false
     })).sort((a, b) => a.gid.localeCompare(b.gid)));
 
