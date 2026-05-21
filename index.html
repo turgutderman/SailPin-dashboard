@@ -124,6 +124,12 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .desc-toggle.open{transform:rotate(180deg)}
 .agenda-desc{display:none;font-size:12px;color:var(--slate);margin-top:6px;padding:8px 12px;background:var(--sun-white);border-left:3px solid var(--pacific-mist);border-radius:0 6px 6px 0;line-height:1.5;word-break:break-word}
 .agenda-desc.show{display:block}
+.detail-section{margin-bottom:10px}
+.detail-section:last-child{margin-bottom:0}
+.detail-label{font-size:11px;font-weight:700;color:var(--pacific);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.detail-row{font-size:12px;padding:2px 0}
+.detail-comment{font-size:12px;padding:4px 0;border-bottom:1px solid var(--linen)}
+.detail-comment:last-child{border-bottom:none}
 .agenda-date-header{font-size:13px;font-weight:700;color:var(--pacific);background:var(--pacific-mist);padding:6px 14px;border-radius:6px;margin:14px 0 8px;letter-spacing:.5px}
 .agenda-date-header:first-child{margin-top:0}
 
@@ -499,12 +505,10 @@ function renderUpdates() {
         const subLink = item.permalink || ('https://app.asana.com/0/0/' + item.gid);
         subBadge = '<a href="' + subLink + '" target="_blank" rel="noopener" class="subtask-badge" title="' + item.subtaskCount + ' subtask' + (item.subtaskCount > 1 ? 's' : '') + '">' + item.subtaskCount + ' sub</a>';
       }
-      // Description expandable
-      let descHtml = '';
-      if (item.description) {
-        const descId = 'desc-' + item.idx;
-        descHtml = '<div class="agenda-desc" id="' + descId + '">' + linkify(item.description.replace(/\n/g, '<br>')) + '</div>';
-      }
+      // Detail panel (lazy-loaded on click)
+      const descId = 'desc-' + item.idx;
+      const descPanel = '<div class="agenda-desc" id="' + descId + '"></div>';
+
       let html = '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '">';
       html += '<input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '>';
       html += '<span class="agenda-num">' + counter + '</span>';
@@ -512,10 +516,11 @@ function renderUpdates() {
       // Inline badges right after text
       if (subBadge) html += ' ' + subBadge;
       if (badge) html += ' ' + badge;
-      if (item.description) {
-        html += ' <button class="desc-toggle" onclick="toggleDesc(' + item.idx + ')" title="Show description">&#9660;</button>';
+      // Every Asana-linked item gets the expand toggle
+      if (item.gid) {
+        html += ' <button class="desc-toggle" onclick="toggleDesc(' + item.idx + ')" title="Show details">&#9660;</button>';
       }
-      html += descHtml + '</div>';
+      html += descPanel + '</div>';
       html += '</div>';
       return html;
     }
@@ -593,18 +598,122 @@ function renderUpdates() {
   }
 }
 
-// ===== DESCRIPTION TOGGLE =====
+// ===== DETAIL PANEL: LAZY-LOAD FROM ASANA =====
+const detailCache = {}; // Cache fetched details by GID
+
 function toggleDesc(idx) {
-  const desc = document.getElementById('desc-' + idx);
-  const btn = desc?.previousElementSibling?.querySelector ? desc.closest('.agenda-item').querySelector('.desc-toggle') : null;
-  // Find button more reliably
-  const allBtns = document.querySelectorAll('.desc-toggle');
-  allBtns.forEach(b => {
-    if (b.getAttribute('onclick') === 'toggleDesc(' + idx + ')') {
-      b.classList.toggle('open');
-    }
-  });
-  if (desc) desc.classList.toggle('show');
+  const panel = document.getElementById('desc-' + idx);
+  if (!panel) return;
+
+  // Find and toggle the button arrow
+  const item = panel.closest('.agenda-item');
+  const btn = item?.querySelector('.desc-toggle');
+  const isOpen = panel.classList.contains('show');
+
+  if (isOpen) {
+    panel.classList.remove('show');
+    if (btn) btn.classList.remove('open');
+    return;
+  }
+
+  // Open the panel
+  panel.classList.add('show');
+  if (btn) btn.classList.add('open');
+
+  // If already loaded, done
+  if (panel.dataset.loaded) return;
+
+  // Get the GID from the parent item
+  const gid = item?.dataset.gid;
+  if (!gid) {
+    // No GID — just show the static description (already in the HTML)
+    panel.dataset.loaded = '1';
+    return;
+  }
+
+  // Check cache first
+  if (detailCache[gid]) {
+    renderDetails(panel, detailCache[gid], idx);
+    return;
+  }
+
+  // Show loading state
+  const existingDesc = panel.innerHTML;
+  panel.innerHTML = '<div style="color:var(--slate);font-size:12px;padding:4px 0">⏳ Loading details from Asana...</div>' + existingDesc;
+
+  // Fetch details
+  fetch('/api/asana-task-details?gid=' + gid)
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        detailCache[gid] = data;
+        renderDetails(panel, data, idx);
+      } else {
+        panel.innerHTML = existingDesc || '<div style="color:#c04a28;font-size:12px">Failed to load details</div>';
+        panel.dataset.loaded = '1';
+      }
+    })
+    .catch(() => {
+      panel.innerHTML = existingDesc || '<div style="color:#c04a28;font-size:12px">Failed to load details</div>';
+      panel.dataset.loaded = '1';
+    });
+}
+
+function renderDetails(panel, data, idx) {
+  let html = '';
+
+  // Description (already synced — get from content JSON)
+  const item = content?.callAgenda?.items?.[idx];
+  const desc = item?.description || '';
+  if (desc) {
+    html += '<div class="detail-section"><div class="detail-label">Description</div>';
+    html += '<div>' + linkify(desc.replace(/\n/g, '<br>')) + '</div></div>';
+  }
+
+  // Subtasks
+  if (data.subtasks?.length) {
+    html += '<div class="detail-section"><div class="detail-label">Subtasks (' + data.subtasks.length + ')</div>';
+    data.subtasks.forEach(s => {
+      const icon = s.completed ? '✅' : '⬜';
+      const cls = s.completed ? ' style="text-decoration:line-through;opacity:.6"' : '';
+      html += '<div class="detail-row"' + cls + '>' + icon + ' ' + linkify(s.name);
+      if (s.due_on) html += ' <span style="color:var(--slate);font-size:11px">(' + s.due_on + ')</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Comments
+  if (data.comments?.length) {
+    html += '<div class="detail-section"><div class="detail-label">Comments (' + data.comments.length + ')</div>';
+    data.comments.forEach(c => {
+      html += '<div class="detail-comment"><strong>' + c.author + '</strong>';
+      if (c.date) html += ' <span style="color:var(--slate);font-size:10px">' + c.date + '</span>';
+      html += '<div>' + linkify(c.text.replace(/\n/g, '<br>')) + '</div></div>';
+    });
+    html += '</div>';
+  }
+
+  // Attachments
+  if (data.attachments?.length) {
+    html += '<div class="detail-section"><div class="detail-label">Attachments (' + data.attachments.length + ')</div>';
+    data.attachments.forEach(a => {
+      if (a.url) {
+        html += '<div class="detail-row">📎 <a href="' + a.url + '" target="_blank" rel="noopener" style="color:var(--pacific-mid)">' + a.name + '</a></div>';
+      } else {
+        html += '<div class="detail-row">📎 ' + a.name + '</div>';
+      }
+    });
+    html += '</div>';
+  }
+
+  // Empty state
+  if (!html && !desc) {
+    html = '<div style="color:var(--slate);font-size:12px">No additional details on this task.</div>';
+  }
+
+  panel.innerHTML = html;
+  panel.dataset.loaded = '1';
 }
 
 // ===== AGENDA TABS + PERSISTENCE + ASANA SYNC =====
