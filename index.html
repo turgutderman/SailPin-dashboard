@@ -106,7 +106,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-tab:hover:not(.active){background:var(--linen)}
 .agenda-count{display:inline-block;background:var(--pacific-mist);color:var(--pacific);font-size:11px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:700}
 .agenda-tab.active .agenda-count{background:var(--pacific);color:#fff}
-.agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px;position:relative}
+.agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px;position:relative;overflow:hidden}
 .agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:flex-start;gap:10px}
 .agenda-item>.agenda-check,.agenda-item>.agenda-num{margin-top:2px;flex-shrink:0}
 .agenda-item:last-child{border:none}
@@ -117,7 +117,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .asana-badge{font-size:11px;flex-shrink:0}
 .asana-link{cursor:pointer;text-decoration:none;color:var(--pacific-mid);background:var(--pacific-mist);padding:3px 8px;border-radius:10px;font-weight:600;white-space:nowrap;transition:all .2s}
 .asana-link:hover{color:#fff;background:var(--pacific)}
-.agenda-content{flex:1;min-width:0}
+.agenda-content{flex:1;min-width:0;overflow:hidden}
 .subtask-badge{font-size:10px;background:var(--pacific-mist);color:var(--pacific);padding:2px 6px;border-radius:10px;text-decoration:none;white-space:nowrap;font-weight:600}
 .subtask-badge:hover{background:var(--pacific);color:#fff}
 .desc-toggle{background:none;border:none;color:var(--slate);font-size:10px;cursor:pointer;padding:0 4px;vertical-align:middle;transition:transform .2s}
