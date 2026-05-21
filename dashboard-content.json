@@ -8,8 +8,12 @@
   },
   "asanaAgendaProject": "1214978656234047",
   "callAgenda": {
-    "date": "2026-05-20",
+    "date": "2026-05-21",
     "items": [
+      {
+        "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
+        "asanaGid": "1215032506033006"
+      },
       {
         "text": "[MirthPlus] Insomniac Brothers",
         "asanaGid": "1214978421773717"
