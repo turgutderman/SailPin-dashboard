@@ -453,7 +453,7 @@ function renderUpdates() {
     const allItems = content.callAgenda.items.map((item, idx) => ({
       text: typeof item === 'string' ? item : item.text,
       gid: typeof item === 'object' ? item.asanaGid : '',
-      date: (typeof item === 'object' && item.date) ? item.date : (content.callAgenda.date || TODAY),
+      date: (typeof item === 'object' && item.date) ? item.date : null,
       idx: idx
     }));
 
@@ -472,14 +472,17 @@ function renderUpdates() {
     // Helper: render a list of items grouped by date
     function renderItemList(items) {
       if (!items.length) return '';
-      const groups = {};
+      const dated = {};
+      const undated = [];
       items.forEach(item => {
-        if (!groups[item.date]) groups[item.date] = [];
-        groups[item.date].push(item);
+        if (!item.date) { undated.push(item); return; }
+        if (!dated[item.date]) dated[item.date] = [];
+        dated[item.date].push(item);
       });
-      const sortedDates = Object.keys(groups).sort();
+      const sortedDates = Object.keys(dated).sort().reverse();
       let html = '';
       let counter = 1;
+      // Render dated items first (newest on top)
       sortedDates.forEach(date => {
         const d = new Date(date + 'T00:00:00');
         const dayDiff = Math.round((d - new Date(TODAY + 'T00:00:00')) / 86400000);
@@ -488,13 +491,23 @@ function renderUpdates() {
         else if (dayDiff === 1) label = 'Tomorrow — ' + label;
         else if (dayDiff === -1) label = 'Yesterday — ' + label;
         html += '<div class="agenda-date-header">' + label + '</div>';
-        groups[date].forEach(item => {
+        dated[date].forEach(item => {
           const checked = savedState[item.idx] ? ' checked' : '';
           const checkedCls = savedState[item.idx] ? ' checked' : '';
           html += '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
           counter++;
         });
       });
+      // Render undated items at the bottom
+      if (undated.length) {
+        html += '<div class="agenda-date-header" style="color:var(--slate);font-style:italic">Undated</div>';
+        undated.forEach(item => {
+          const checked = savedState[item.idx] ? ' checked' : '';
+          const checkedCls = savedState[item.idx] ? ' checked' : '';
+          html += '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
+          counter++;
+        });
+      }
       return html;
     }
 
