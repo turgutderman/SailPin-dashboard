@@ -100,7 +100,13 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .contacts-table tr:hover td{background:var(--sand)}
 
 /* CALL AGENDA */
-.agenda-box{background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px}
+.agenda-tabs{display:flex;gap:4px;margin-bottom:0}
+.agenda-tab{padding:10px 20px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;border-radius:10px 10px 0 0;transition:.2s;background:var(--sand-dark)}
+.agenda-tab.active{background:var(--sun-white);color:var(--pacific-dark);box-shadow:0 -2px 8px rgba(13,47,85,.06)}
+.agenda-tab:hover:not(.active){background:var(--linen)}
+.agenda-count{display:inline-block;background:var(--pacific-mist);color:var(--pacific);font-size:11px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:700}
+.agenda-tab.active .agenda-count{background:var(--pacific);color:#fff}
+.agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px}
 .agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:center;gap:10px}
 .agenda-item:last-child{border:none}
 .agenda-check{width:20px;height:20px;accent-color:var(--pacific);cursor:pointer;flex-shrink:0}
@@ -169,8 +175,15 @@ footer strong{color:var(--pacific-dark)}
 <!-- ===== UPDATES & AGENDA (always visible at top) ===== -->
 <div id="top-updates">
   <div class="section-title"><span class="icon">&#127909;</span> Call Agenda</div>
-  <div class="agenda-box" id="agenda-box">
+  <div class="agenda-tabs">
+    <div class="agenda-tab active" data-atab="current" onclick="switchAgendaTab('current')">Current Items <span class="agenda-count" id="count-current">0</span></div>
+    <div class="agenda-tab" data-atab="completed" onclick="switchAgendaTab('completed')">Completed Items <span class="agenda-count" id="count-completed">0</span></div>
+  </div>
+  <div class="agenda-box" id="agenda-current">
     <div class="loading"><div class="spinner"></div><br>Loading agenda...</div>
+  </div>
+  <div class="agenda-box" id="agenda-completed" style="display:none">
+    <p style="color:var(--slate);font-size:13px;">No completed items yet.</p>
   </div>
 
   <div class="updates-row">
@@ -434,43 +447,71 @@ function linkify(text) {
 function renderUpdates() {
   if (!content) return;
 
-  // Call agenda — grouped by date
+  // Call agenda — split into current and completed panels
   if (content.callAgenda?.items?.length) {
-    // Group items by date
-    const groups = {};
-    content.callAgenda.items.forEach(item => {
-      const text = typeof item === 'string' ? item : item.text;
-      const gid = typeof item === 'object' ? item.asanaGid : '';
-      const date = (typeof item === 'object' && item.date) ? item.date : (content.callAgenda.date || TODAY);
-      if (!groups[date]) groups[date] = [];
-      groups[date].push({ text, gid });
+    // Parse all items with their index for state tracking
+    const allItems = content.callAgenda.items.map((item, idx) => ({
+      text: typeof item === 'string' ? item : item.text,
+      gid: typeof item === 'object' ? item.asanaGid : '',
+      date: (typeof item === 'object' && item.date) ? item.date : (content.callAgenda.date || TODAY),
+      idx: idx
+    }));
+
+    // Load saved check state
+    let savedState = [];
+    try { savedState = JSON.parse(localStorage.getItem('sp_agenda') || '[]'); } catch(e) {}
+
+    // Split items into current vs completed based on saved state
+    const currentItems = [];
+    const completedItems = [];
+    allItems.forEach(item => {
+      if (savedState[item.idx]) completedItems.push(item);
+      else currentItems.push(item);
     });
 
-    // Sort dates ascending
-    const sortedDates = Object.keys(groups).sort();
-
-    // Render each date group
-    let html = '';
-    let counter = 1;
-    sortedDates.forEach(date => {
-      const d = new Date(date + 'T00:00:00');
-      const dayDiff = Math.round((d - new Date(TODAY + 'T00:00:00')) / 86400000);
-      let label = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
-      if (dayDiff === 0) label = 'Today — ' + label;
-      else if (dayDiff === 1) label = 'Tomorrow — ' + label;
-      else if (dayDiff === -1) label = 'Yesterday — ' + label;
-
-      html += '<div class="agenda-date-header">' + label + '</div>';
-      groups[date].forEach(item => {
-        html += '<div class="agenda-item" data-gid="' + (item.gid || '') + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
-        counter++;
+    // Helper: render a list of items grouped by date
+    function renderItemList(items) {
+      if (!items.length) return '';
+      const groups = {};
+      items.forEach(item => {
+        if (!groups[item.date]) groups[item.date] = [];
+        groups[item.date].push(item);
       });
-    });
+      const sortedDates = Object.keys(groups).sort();
+      let html = '';
+      let counter = 1;
+      sortedDates.forEach(date => {
+        const d = new Date(date + 'T00:00:00');
+        const dayDiff = Math.round((d - new Date(TODAY + 'T00:00:00')) / 86400000);
+        let label = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+        if (dayDiff === 0) label = 'Today — ' + label;
+        else if (dayDiff === 1) label = 'Tomorrow — ' + label;
+        else if (dayDiff === -1) label = 'Yesterday — ' + label;
+        html += '<div class="agenda-date-header">' + label + '</div>';
+        groups[date].forEach(item => {
+          const checked = savedState[item.idx] ? ' checked' : '';
+          const checkedCls = savedState[item.idx] ? ' checked' : '';
+          html += '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
+          counter++;
+        });
+      });
+      return html;
+    }
 
-    document.getElementById('agenda-box').innerHTML = html;
-    loadAgendaState();
+    // Render current items
+    const currentHtml = renderItemList(currentItems);
+    document.getElementById('agenda-current').innerHTML = currentHtml || '<p style="color:var(--slate);font-size:13px;">All items completed!</p>';
+
+    // Render completed items
+    const completedHtml = renderItemList(completedItems);
+    document.getElementById('agenda-completed').innerHTML = completedHtml || '<p style="color:var(--slate);font-size:13px;">No completed items yet.</p>';
+
+    // Update tab counts
+    updateAgendaCounts();
   } else {
-    document.getElementById('agenda-box').innerHTML = '<p style="color:var(--slate);font-size:13px;">No agenda items set.</p>';
+    document.getElementById('agenda-current').innerHTML = '<p style="color:var(--slate);font-size:13px;">No agenda items set.</p>';
+    document.getElementById('agenda-completed').innerHTML = '<p style="color:var(--slate);font-size:13px;">No completed items yet.</p>';
+    updateAgendaCounts();
   }
 
   // Pinned notes
@@ -492,11 +533,31 @@ function renderUpdates() {
   }
 }
 
-// ===== AGENDA PERSISTENCE + ASANA SYNC =====
+// ===== AGENDA TABS + PERSISTENCE + ASANA SYNC =====
+function switchAgendaTab(tab) {
+  document.querySelectorAll('.agenda-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.agenda-tab[data-atab="' + tab + '"]').classList.add('active');
+  document.getElementById('agenda-current').style.display = tab === 'current' ? '' : 'none';
+  document.getElementById('agenda-completed').style.display = tab === 'completed' ? '' : 'none';
+}
+
+function updateAgendaCounts() {
+  const currentCount = document.querySelectorAll('#agenda-current .agenda-item').length;
+  const completedCount = document.querySelectorAll('#agenda-completed .agenda-item').length;
+  document.getElementById('count-current').textContent = currentCount;
+  document.getElementById('count-completed').textContent = completedCount;
+}
+
 function toggleAgenda(cb) {
   const li = cb.closest('.agenda-item');
+  const idx = parseInt(li.dataset.idx);
   li.classList.toggle('checked', cb.checked);
-  saveAgendaState();
+
+  // Save state by index
+  let savedState = [];
+  try { savedState = JSON.parse(localStorage.getItem('sp_agenda') || '[]'); } catch(e) {}
+  savedState[idx] = cb.checked;
+  localStorage.setItem('sp_agenda', JSON.stringify(savedState));
 
   // Sync to Asana if linked
   const gid = li.dataset.gid;
@@ -515,18 +576,39 @@ function toggleAgenda(cb) {
     })
     .catch(() => { if (badge) badge.textContent = '⚠'; });
   }
+
+  // Move item between panels after a short delay for visual feedback
+  setTimeout(() => {
+    const targetPanel = cb.checked ? 'agenda-completed' : 'agenda-current';
+    const panel = document.getElementById(targetPanel);
+    // Remove "no items" placeholder if present
+    const placeholder = panel.querySelector('p');
+    if (placeholder) placeholder.remove();
+    // Move the item
+    panel.appendChild(li);
+    // Re-number items in both panels
+    renumberAgendaItems();
+    // Update counts
+    updateAgendaCounts();
+    // If source panel is now empty, add placeholder
+    const currentPanel = document.getElementById('agenda-current');
+    const completedPanel = document.getElementById('agenda-completed');
+    if (!currentPanel.querySelector('.agenda-item')) {
+      currentPanel.innerHTML = '<p style="color:var(--slate);font-size:13px;">All items completed!</p>';
+    }
+    if (!completedPanel.querySelector('.agenda-item')) {
+      completedPanel.innerHTML = '<p style="color:var(--slate);font-size:13px;">No completed items yet.</p>';
+    }
+  }, 600);
 }
-function saveAgendaState() {
-  const checks = document.querySelectorAll('.agenda-check');
-  localStorage.setItem('sp_agenda', JSON.stringify(Array.from(checks).map(c => c.checked)));
-}
-function loadAgendaState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('sp_agenda') || '[]');
-    document.querySelectorAll('.agenda-check').forEach((c, i) => {
-      if (saved[i]) { c.checked = true; c.closest('.agenda-item').classList.add('checked'); }
+
+function renumberAgendaItems() {
+  ['agenda-current', 'agenda-completed'].forEach(panelId => {
+    let counter = 1;
+    document.querySelectorAll('#' + panelId + ' .agenda-item .agenda-num').forEach(num => {
+      num.textContent = counter++;
     });
-  } catch(e) {}
+  });
 }
 
 // ===== INIT =====
