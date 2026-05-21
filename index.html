@@ -106,7 +106,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-tab:hover:not(.active){background:var(--linen)}
 .agenda-count{display:inline-block;background:var(--pacific-mist);color:var(--pacific);font-size:11px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:700}
 .agenda-tab.active .agenda-count{background:var(--pacific);color:#fff}
-.agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px}
+.agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px;position:relative}
 .agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:flex-start;gap:10px}
 .agenda-item>.agenda-check,.agenda-item>.agenda-num{margin-top:2px;flex-shrink:0}
 .agenda-item:last-child{border:none}
@@ -132,7 +132,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .detail-comment:last-child{border-bottom:none}
 .agenda-date-header{font-size:13px;font-weight:700;color:var(--pacific);background:var(--pacific-mist);padding:6px 14px;border-radius:6px;margin:14px 0 8px;letter-spacing:.5px}
 .agenda-date-header:first-child{margin-top:0}
-.expand-all-bar{display:inline-flex;margin-left:auto}
+.expand-all-wrap{position:absolute;top:8px;right:12px;z-index:2}
 .expand-all-btn{background:var(--pacific-mist);color:var(--pacific);border:1px solid var(--pacific-mid);border-radius:8px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.3px}
 .expand-all-btn:hover{background:var(--pacific);color:#fff}
 .expand-all-btn.loading{opacity:.6;cursor:wait}
@@ -199,7 +199,6 @@ footer strong{color:var(--pacific-dark)}
   <div class="agenda-tabs">
     <div class="agenda-tab active" data-atab="current" onclick="switchAgendaTab('current')">Current Items <span class="agenda-count" id="count-current">0</span></div>
     <div class="agenda-tab" data-atab="completed" onclick="switchAgendaTab('completed')">Completed Items <span class="agenda-count" id="count-completed">0</span></div>
-    <div class="expand-all-bar" id="expand-all-bar"></div>
   </div>
   <div class="agenda-box" id="agenda-current">
     <div class="loading"><div class="spinner"></div><br>Loading agenda...</div>
@@ -571,12 +570,8 @@ function renderUpdates() {
 
     // Render current items
     const currentHtml = renderItemList(currentItems);
-    document.getElementById('agenda-current').innerHTML = currentHtml || '<p style="color:var(--slate);font-size:13px;">All items completed!</p>';
-    // Populate expand-all button in tab bar
-    const expandBar = document.getElementById('expand-all-bar');
-    if (expandBar && currentItems.some(i => i.gid)) {
-      expandBar.innerHTML = '<button class="expand-all-btn" id="expand-all-btn" onclick="toggleAllDetails()">&#9660; Expand All</button>';
-    }
+    const expandBtn = currentItems.some(i => i.gid) ? '<div class="expand-all-wrap"><button class="expand-all-btn" id="expand-all-btn" onclick="toggleAllDetails()">&#9660; Expand All</button></div>' : '';
+    document.getElementById('agenda-current').innerHTML = expandBtn + (currentHtml || '<p style="color:var(--slate);font-size:13px;">All items completed!</p>');
 
     // Render completed items
     const completedHtml = renderItemList(completedItems);
