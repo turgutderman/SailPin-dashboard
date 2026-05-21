@@ -117,8 +117,7 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .asana-badge{font-size:11px;flex-shrink:0}
 .asana-link{cursor:pointer;text-decoration:none;color:var(--pacific-mid);background:var(--pacific-mist);padding:3px 8px;border-radius:10px;font-weight:600;white-space:nowrap;transition:all .2s}
 .asana-link:hover{color:#fff;background:var(--pacific)}
-.agenda-content{flex:1;min-width:0;overflow:hidden}
-.agenda-badges{display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:8px}
+.agenda-content{flex:1;min-width:0}
 .subtask-badge{font-size:10px;background:var(--pacific-mist);color:var(--pacific);padding:2px 6px;border-radius:10px;text-decoration:none;white-space:nowrap;font-weight:600}
 .subtask-badge:hover{background:var(--pacific);color:#fff}
 .desc-toggle{background:none;border:none;color:var(--slate);font-size:10px;cursor:pointer;padding:0 4px;vertical-align:middle;transition:transform .2s}
@@ -510,11 +509,13 @@ function renderUpdates() {
       html += '<input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '>';
       html += '<span class="agenda-num">' + counter + '</span>';
       html += '<div class="agenda-content"><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>';
+      // Inline badges right after text
+      if (subBadge) html += ' ' + subBadge;
+      if (badge) html += ' ' + badge;
       if (item.description) {
         html += ' <button class="desc-toggle" onclick="toggleDesc(' + item.idx + ')" title="Show description">&#9660;</button>';
       }
       html += descHtml + '</div>';
-      html += '<span class="agenda-badges">' + subBadge + badge + '</span>';
       html += '</div>';
       return html;
     }
