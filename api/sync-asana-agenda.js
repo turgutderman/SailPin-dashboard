@@ -80,7 +80,7 @@ export default async function handler(req, res) {
       const item = {
         text: task.name,
         asanaGid: task.gid,
-        date: task.due_on || today
+        date: task.due_on || null
       };
 
       // Mark completed items so frontend can sort them
