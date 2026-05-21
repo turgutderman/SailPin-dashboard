@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
   try {
     // ── Step 1: Fetch all tasks from Asana agenda project ──
-    const asanaUrl = `https://app.asana.com/api/1.0/tasks?project=${ASANA_PROJECT_GID}&opt_fields=name,completed,due_on&limit=100`;
+    const asanaUrl = `https://app.asana.com/api/1.0/tasks?project=${ASANA_PROJECT_GID}&opt_fields=name,completed,due_on,notes,permalink_url,num_subtasks&limit=100`;
     const asanaRes = await fetch(asanaUrl, {
       headers: {
         'Authorization': `Bearer ${ASANA_TOKEN}`,
@@ -80,8 +80,19 @@ export default async function handler(req, res) {
       const item = {
         text: task.name,
         asanaGid: task.gid,
-        date: task.due_on || null
+        date: task.due_on || null,
+        permalink: task.permalink_url || null
       };
+
+      // Add description if present (trim to avoid bloat)
+      if (task.notes && task.notes.trim()) {
+        item.description = task.notes.trim();
+      }
+
+      // Add subtask count if any
+      if (task.num_subtasks > 0) {
+        item.subtaskCount = task.num_subtasks;
+      }
 
       // Mark completed items so frontend can sort them
       if (task.completed) {
@@ -97,6 +108,8 @@ export default async function handler(req, res) {
       text: typeof i === 'string' ? i : i.text,
       gid: i.asanaGid || '',
       date: i.date || null,
+      desc: i.description || '',
+      subs: i.subtaskCount || 0,
       completed: i.completed || false
     })).sort((a, b) => a.gid.localeCompare(b.gid)));
 
@@ -104,6 +117,8 @@ export default async function handler(req, res) {
       text: i.text,
       gid: i.asanaGid,
       date: i.date || null,
+      desc: i.description || '',
+      subs: i.subtaskCount || 0,
       completed: i.completed || false
     })).sort((a, b) => a.gid.localeCompare(b.gid)));
 
