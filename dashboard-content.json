@@ -82,7 +82,8 @@
       {
         "text": "[MirthPlus] End date for roll-on product — pulling it back",
         "asanaGid": "1214978379496738",
-        "date": "2026-05-20"
+        "date": "2026-05-20",
+        "completed": true
       },
       {
         "text": "[SailPin] Explore Printful All-Over Print collection for PoD products",
@@ -92,7 +93,8 @@
       {
         "text": "[MirthPlus] Insomniac Brothers",
         "asanaGid": "1214978421773717",
-        "date": "2026-05-20"
+        "date": "2026-05-20",
+        "completed": true
       },
       {
         "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
