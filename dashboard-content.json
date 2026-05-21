@@ -18,7 +18,7 @@
       {
         "text": "This a test task from Asana to Vercel",
         "asanaGid": "1215037811944703",
-        "date": "2026-05-21",
+        "date": null,
         "completed": true
       },
       {
@@ -30,17 +30,17 @@
       {
         "text": "Gmail forwarding Filer (to show Bonnie)",
         "asanaGid": "1215037811944713",
-        "date": "2026-05-21"
+        "date": null
       },
       {
         "text": "SailPİn Google Accounst all updated and connected to Shopify ",
         "asanaGid": "1215037811944715",
-        "date": "2026-05-21"
+        "date": null
       },
       {
         "text": "RSS feed is High Priority",
         "asanaGid": "1215037811944709",
-        "date": "2026-05-21"
+        "date": null
       },
       {
         "text": "Discuss with Bonnie and Frances — additional items for today",
@@ -56,7 +56,7 @@
       {
         "text": "Asana tasks Update is running",
         "asanaGid": "1215037811944707",
-        "date": "2026-05-21"
+        "date": null
       },
       {
         "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
