@@ -114,9 +114,9 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
 .agenda-item.checked{opacity:.5}
 .agenda-num{background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.asana-badge{font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default}
-.asana-link{cursor:pointer;text-decoration:none;transition:color .2s}
-.asana-link:hover{color:var(--pacific);transform:scale(1.2)}
+.asana-badge{font-size:11px;flex-shrink:0}
+.asana-link{cursor:pointer;text-decoration:none;color:var(--pacific-mid);background:var(--pacific-mist);padding:3px 8px;border-radius:10px;font-weight:600;white-space:nowrap;transition:all .2s}
+.asana-link:hover{color:#fff;background:var(--pacific)}
 .agenda-content{flex:1;min-width:0;overflow:hidden}
 .agenda-badges{display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:8px}
 .subtask-badge{font-size:10px;background:var(--pacific-mist);color:var(--pacific);padding:2px 6px;border-radius:10px;text-decoration:none;white-space:nowrap;font-weight:600}
@@ -490,9 +490,9 @@ function renderUpdates() {
       // Asana link badge (replaces plain cog)
       let badge = '';
       if (item.permalink) {
-        badge = '<a href="' + item.permalink + '" target="_blank" rel="noopener" class="asana-badge asana-link" title="Open in Asana">&#9881;</a>';
+        badge = '<a href="' + item.permalink + '" target="_blank" rel="noopener" class="asana-link" title="Open in Asana">Asana&nbsp;&#8599;</a>';
       } else if (item.gid) {
-        badge = '<a href="https://app.asana.com/0/0/' + item.gid + '" target="_blank" rel="noopener" class="asana-badge asana-link" title="Open in Asana">&#9881;</a>';
+        badge = '<a href="https://app.asana.com/0/0/' + item.gid + '" target="_blank" rel="noopener" class="asana-link" title="Open in Asana">Asana&nbsp;&#8599;</a>';
       }
       // Subtask badge
       let subBadge = '';
@@ -635,7 +635,8 @@ function toggleAgenda(cb) {
   // Sync to Asana if linked
   const gid = li.dataset.gid;
   if (gid) {
-    const badge = li.querySelector('.asana-badge');
+    const badge = li.querySelector('.asana-link');
+    const origText = badge ? badge.innerHTML : '';
     if (badge) badge.textContent = '⏳';
     fetch('/api/agenda-complete', {
       method: 'POST',
@@ -644,8 +645,8 @@ function toggleAgenda(cb) {
     })
     .then(r => r.json())
     .then(data => {
-      if (badge) badge.textContent = data.success ? '✓' : '⚠';
-      if (badge && data.success) setTimeout(() => badge.textContent = '⚙', 2000);
+      if (badge) badge.textContent = data.success ? '✓ Synced' : '⚠ Error';
+      if (badge && data.success) setTimeout(() => badge.innerHTML = origText, 2000);
     })
     .catch(() => { if (badge) badge.textContent = '⚠'; });
   }
