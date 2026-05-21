@@ -107,7 +107,9 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
 .agenda-item.checked{opacity:.5}
 .agenda-num{background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.asana-badge{margin-left:auto;font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default;title:Synced to Asana}
+.asana-badge{margin-left:auto;font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default}
+.agenda-date-header{font-size:13px;font-weight:700;color:var(--pacific);background:var(--pacific-mist);padding:6px 14px;border-radius:6px;margin:14px 0 8px;letter-spacing:.5px}
+.agenda-date-header:first-child{margin-top:0}
 
 /* NOTES */
 .notes-box{background:var(--sun-white);border-radius:12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--coral);margin-bottom:24px}
@@ -432,14 +434,39 @@ function linkify(text) {
 function renderUpdates() {
   if (!content) return;
 
-  // Call agenda (supports both string items and {text, asanaGid} objects)
+  // Call agenda — grouped by date
   if (content.callAgenda?.items?.length) {
-    let html = '<div style="font-size:12px;color:var(--slate);margin-bottom:10px">Agenda for ' + content.callAgenda.date + '</div>';
-    content.callAgenda.items.forEach((item, i) => {
+    // Group items by date
+    const groups = {};
+    content.callAgenda.items.forEach(item => {
       const text = typeof item === 'string' ? item : item.text;
       const gid = typeof item === 'object' ? item.asanaGid : '';
-      html += '<div class="agenda-item" data-gid="' + (gid || '') + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + (i+1) + '</span><span class="agenda-text"><strong>' + linkify(text) + '</strong></span>' + (gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
+      const date = (typeof item === 'object' && item.date) ? item.date : (content.callAgenda.date || TODAY);
+      if (!groups[date]) groups[date] = [];
+      groups[date].push({ text, gid });
     });
+
+    // Sort dates ascending
+    const sortedDates = Object.keys(groups).sort();
+
+    // Render each date group
+    let html = '';
+    let counter = 1;
+    sortedDates.forEach(date => {
+      const d = new Date(date + 'T00:00:00');
+      const dayDiff = Math.round((d - new Date(TODAY + 'T00:00:00')) / 86400000);
+      let label = d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      if (dayDiff === 0) label = 'Today — ' + label;
+      else if (dayDiff === 1) label = 'Tomorrow — ' + label;
+      else if (dayDiff === -1) label = 'Yesterday — ' + label;
+
+      html += '<div class="agenda-date-header">' + label + '</div>';
+      groups[date].forEach(item => {
+        html += '<div class="agenda-item" data-gid="' + (item.gid || '') + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
+        counter++;
+      });
+    });
+
     document.getElementById('agenda-box').innerHTML = html;
     loadAgendaState();
   } else {
