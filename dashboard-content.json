@@ -8,47 +8,56 @@
   },
   "asanaAgendaProject": "1214978656234047",
   "callAgenda": {
-    "date": "2026-05-21",
     "items": [
       {
-        "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
-        "asanaGid": "1215032506033006"
-      },
-      {
         "text": "[MirthPlus] Insomniac Brothers",
-        "asanaGid": "1214978421773717"
+        "asanaGid": "1214978421773717",
+        "date": "2026-05-20"
       },
       {
         "text": "[MirthPlus] End date for roll-on product — pulling it back",
-        "asanaGid": "1214978379496738"
+        "asanaGid": "1214978379496738",
+        "date": "2026-05-20"
       },
       {
         "text": "Discuss with Bonnie and Frances — additional items for today",
-        "asanaGid": "1214978421732855"
+        "asanaGid": "1214978421732855",
+        "date": "2026-05-20"
       },
       {
         "text": "Workflows are up and in place — confirm all running correctly",
-        "asanaGid": "1214978219699164"
+        "asanaGid": "1214978219699164",
+        "date": "2026-05-20"
       },
       {
         "text": "GHL connection to Shopify: blocked — Shopify needs to update their site with API integration first",
-        "asanaGid": "1214978379377696"
+        "asanaGid": "1214978379377696",
+        "date": "2026-05-20"
       },
       {
         "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
-        "asanaGid": "1214978576518724"
+        "asanaGid": "1214978576518724",
+        "date": "2026-05-20"
       },
       {
         "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
-        "asanaGid": "1214978421595348"
+        "asanaGid": "1214978421595348",
+        "date": "2026-05-20"
       },
       {
         "text": "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
-        "asanaGid": "1214978421660686"
+        "asanaGid": "1214978421660686",
+        "date": "2026-05-20"
       },
       {
         "text": "[SailPin] Explore Printful All-Over Print collection for PoD products — https://www.printful.com/custom/collections/all-over-print",
-        "asanaGid": "1214978379426417"
+        "asanaGid": "1214978379426417",
+        "date": "2026-05-20"
+      },
+      {
+        "text": "[SailPin] Google Merchant Center for SailPin is connected — call topic",
+        "asanaGid": "1215032506033006",
+        "date": "2026-05-21"
       }
     ]
   },
