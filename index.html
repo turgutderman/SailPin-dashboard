@@ -107,8 +107,8 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-count{display:inline-block;background:var(--pacific-mist);color:var(--pacific);font-size:11px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:700}
 .agenda-tab.active .agenda-count{background:var(--pacific);color:#fff}
 .agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px}
-.agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
-.agenda-item>.agenda-check,.agenda-item>.agenda-num{margin-top:2px}
+.agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:flex-start;gap:10px}
+.agenda-item>.agenda-check,.agenda-item>.agenda-num{margin-top:2px;flex-shrink:0}
 .agenda-item:last-child{border:none}
 .agenda-check{width:20px;height:20px;accent-color:var(--pacific);cursor:pointer;flex-shrink:0}
 .agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
@@ -117,8 +117,8 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .asana-badge{font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default}
 .asana-link{cursor:pointer;text-decoration:none;transition:color .2s}
 .asana-link:hover{color:var(--pacific);transform:scale(1.2)}
-.agenda-content{flex:1;min-width:0}
-.agenda-badges{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+.agenda-content{flex:1;min-width:0;overflow:hidden}
+.agenda-badges{display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:8px}
 .subtask-badge{font-size:10px;background:var(--pacific-mist);color:var(--pacific);padding:2px 6px;border-radius:10px;text-decoration:none;white-space:nowrap;font-weight:600}
 .subtask-badge:hover{background:var(--pacific);color:#fff}
 .desc-toggle{background:none;border:none;color:var(--slate);font-size:10px;cursor:pointer;padding:0 4px;vertical-align:middle;transition:transform .2s}
