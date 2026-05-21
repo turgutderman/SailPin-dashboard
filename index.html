@@ -107,13 +107,24 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .agenda-count{display:inline-block;background:var(--pacific-mist);color:var(--pacific);font-size:11px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:700}
 .agenda-tab.active .agenda-count{background:var(--pacific);color:#fff}
 .agenda-box{background:var(--sun-white);border-radius:0 12px 12px 12px;padding:24px 28px;box-shadow:0 2px 12px rgba(13,47,85,.08);border-left:5px solid var(--pacific);margin-bottom:24px}
-.agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:center;gap:10px}
+.agenda-item{padding:10px 0;border-bottom:1px solid var(--linen);font-size:14px;display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.agenda-item>.agenda-check,.agenda-item>.agenda-num{margin-top:2px}
 .agenda-item:last-child{border:none}
 .agenda-check{width:20px;height:20px;accent-color:var(--pacific);cursor:pointer;flex-shrink:0}
 .agenda-item.checked .agenda-text{text-decoration:line-through;color:var(--slate)}
 .agenda-item.checked{opacity:.5}
 .agenda-num{background:var(--pacific);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.asana-badge{margin-left:auto;font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default}
+.asana-badge{font-size:14px;color:var(--pacific-mid);flex-shrink:0;cursor:default}
+.asana-link{cursor:pointer;text-decoration:none;transition:color .2s}
+.asana-link:hover{color:var(--pacific);transform:scale(1.2)}
+.agenda-content{flex:1;min-width:0}
+.agenda-badges{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+.subtask-badge{font-size:10px;background:var(--pacific-mist);color:var(--pacific);padding:2px 6px;border-radius:10px;text-decoration:none;white-space:nowrap;font-weight:600}
+.subtask-badge:hover{background:var(--pacific);color:#fff}
+.desc-toggle{background:none;border:none;color:var(--slate);font-size:10px;cursor:pointer;padding:0 4px;vertical-align:middle;transition:transform .2s}
+.desc-toggle.open{transform:rotate(180deg)}
+.agenda-desc{display:none;font-size:12px;color:var(--slate);margin-top:6px;padding:8px 12px;background:var(--sun-white);border-left:3px solid var(--pacific-mist);border-radius:0 6px 6px 0;line-height:1.5;word-break:break-word}
+.agenda-desc.show{display:block}
 .agenda-date-header{font-size:13px;font-weight:700;color:var(--pacific);background:var(--pacific-mist);padding:6px 14px;border-radius:6px;margin:14px 0 8px;letter-spacing:.5px}
 .agenda-date-header:first-child{margin-top:0}
 
@@ -454,6 +465,9 @@ function renderUpdates() {
       text: typeof item === 'string' ? item : item.text,
       gid: typeof item === 'object' ? item.asanaGid : '',
       date: (typeof item === 'object' && item.date) ? item.date : null,
+      description: (typeof item === 'object' && item.description) ? item.description : '',
+      permalink: (typeof item === 'object' && item.permalink) ? item.permalink : '',
+      subtaskCount: (typeof item === 'object' && item.subtaskCount) ? item.subtaskCount : 0,
       idx: idx
     }));
 
@@ -468,6 +482,42 @@ function renderUpdates() {
       if (savedState[item.idx]) completedItems.push(item);
       else currentItems.push(item);
     });
+
+    // Helper: render a single agenda item
+    function renderItem(item, counter, savedState) {
+      const checked = savedState[item.idx] ? ' checked' : '';
+      const checkedCls = savedState[item.idx] ? ' checked' : '';
+      // Asana link badge (replaces plain cog)
+      let badge = '';
+      if (item.permalink) {
+        badge = '<a href="' + item.permalink + '" target="_blank" rel="noopener" class="asana-badge asana-link" title="Open in Asana">&#9881;</a>';
+      } else if (item.gid) {
+        badge = '<a href="https://app.asana.com/0/0/' + item.gid + '" target="_blank" rel="noopener" class="asana-badge asana-link" title="Open in Asana">&#9881;</a>';
+      }
+      // Subtask badge
+      let subBadge = '';
+      if (item.subtaskCount > 0) {
+        const subLink = item.permalink || ('https://app.asana.com/0/0/' + item.gid);
+        subBadge = '<a href="' + subLink + '" target="_blank" rel="noopener" class="subtask-badge" title="' + item.subtaskCount + ' subtask' + (item.subtaskCount > 1 ? 's' : '') + '">' + item.subtaskCount + ' sub</a>';
+      }
+      // Description expandable
+      let descHtml = '';
+      if (item.description) {
+        const descId = 'desc-' + item.idx;
+        descHtml = '<div class="agenda-desc" id="' + descId + '">' + linkify(item.description.replace(/\n/g, '<br>')) + '</div>';
+      }
+      let html = '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '">';
+      html += '<input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '>';
+      html += '<span class="agenda-num">' + counter + '</span>';
+      html += '<div class="agenda-content"><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>';
+      if (item.description) {
+        html += ' <button class="desc-toggle" onclick="toggleDesc(' + item.idx + ')" title="Show description">&#9660;</button>';
+      }
+      html += descHtml + '</div>';
+      html += '<span class="agenda-badges">' + subBadge + badge + '</span>';
+      html += '</div>';
+      return html;
+    }
 
     // Helper: render a list of items grouped by date
     function renderItemList(items) {
@@ -492,9 +542,7 @@ function renderUpdates() {
         else if (dayDiff === -1) label = 'Yesterday — ' + label;
         html += '<div class="agenda-date-header">' + label + '</div>';
         dated[date].forEach(item => {
-          const checked = savedState[item.idx] ? ' checked' : '';
-          const checkedCls = savedState[item.idx] ? ' checked' : '';
-          html += '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
+          html += renderItem(item, counter, savedState);
           counter++;
         });
       });
@@ -502,9 +550,7 @@ function renderUpdates() {
       if (undated.length) {
         html += '<div class="agenda-date-header" style="color:var(--slate);font-style:italic">Undated</div>';
         undated.forEach(item => {
-          const checked = savedState[item.idx] ? ' checked' : '';
-          const checkedCls = savedState[item.idx] ? ' checked' : '';
-          html += '<div class="agenda-item' + checkedCls + '" data-gid="' + (item.gid || '') + '" data-idx="' + item.idx + '"><input type="checkbox" class="agenda-check" onchange="toggleAgenda(this)"' + checked + '><span class="agenda-num">' + counter + '</span><span class="agenda-text"><strong>' + linkify(item.text) + '</strong></span>' + (item.gid ? '<span class="asana-badge" title="Synced to Asana">&#9881;</span>' : '') + '</div>';
+          html += renderItem(item, counter, savedState);
           counter++;
         });
       }
@@ -544,6 +590,20 @@ function renderUpdates() {
     });
     document.getElementById('status-updates').innerHTML = '<div style="background:var(--sun-white);border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(13,47,85,.06)">' + html + '</div>';
   }
+}
+
+// ===== DESCRIPTION TOGGLE =====
+function toggleDesc(idx) {
+  const desc = document.getElementById('desc-' + idx);
+  const btn = desc?.previousElementSibling?.querySelector ? desc.closest('.agenda-item').querySelector('.desc-toggle') : null;
+  // Find button more reliably
+  const allBtns = document.querySelectorAll('.desc-toggle');
+  allBtns.forEach(b => {
+    if (b.getAttribute('onclick') === 'toggleDesc(' + idx + ')') {
+      b.classList.toggle('open');
+    }
+  });
+  if (desc) desc.classList.toggle('show');
 }
 
 // ===== AGENDA TABS + PERSISTENCE + ASANA SYNC =====
