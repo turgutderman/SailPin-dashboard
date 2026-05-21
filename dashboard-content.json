@@ -42,7 +42,8 @@
       {
         "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
         "asanaGid": "1214978421595348",
-        "date": "2026-05-20"
+        "date": "2026-05-20",
+        "completed": true
       },
       {
         "text": "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
@@ -62,6 +63,16 @@
       {
         "text": "How Frances could actually update the site",
         "asanaGid": "1215029763424793",
+        "date": "2026-05-21"
+      },
+      {
+        "text": "this is frances",
+        "asanaGid": "1215035208093643",
+        "date": "2026-05-21"
+      },
+      {
+        "text": "This a test task from Asana to Vercel",
+        "asanaGid": "1215037811944703",
         "date": "2026-05-21"
       }
     ]
