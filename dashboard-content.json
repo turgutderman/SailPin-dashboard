@@ -42,7 +42,8 @@
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944715",
         "description": "This is the Friday session",
-        "subtaskCount": 1
+        "subtaskCount": 1,
+        "completed": true
       },
       {
         "text": "RSS feed is High Priority",
@@ -61,7 +62,8 @@
         "text": "Make Setup up and running Shopify Connection",
         "asanaGid": "1214978379377696",
         "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379377696"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379377696",
+        "completed": true
       },
       {
         "text": "Asana tasks Update is running",
