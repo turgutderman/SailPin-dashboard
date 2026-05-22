@@ -67,7 +67,8 @@
         "text": "Asana tasks Update is running",
         "asanaGid": "1215037811944707",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944707"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944707",
+        "completed": true
       },
       {
         "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
