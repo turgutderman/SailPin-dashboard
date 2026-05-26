@@ -478,6 +478,7 @@ function renderUpdates() {
       description: (typeof item === 'object' && item.description) ? item.description : '',
       permalink: (typeof item === 'object' && item.permalink) ? item.permalink : '',
       subtaskCount: (typeof item === 'object' && item.subtaskCount) ? item.subtaskCount : 0,
+      completed: (typeof item === 'object' && item.completed) ? true : false,
       idx: idx
     }));
 
@@ -485,18 +486,19 @@ function renderUpdates() {
     let savedState = [];
     try { savedState = JSON.parse(localStorage.getItem('sp_agenda') || '[]'); } catch(e) {}
 
-    // Split items into current vs completed based on saved state
+    // Split items into current vs completed based on Asana status + saved state
     const currentItems = [];
     const completedItems = [];
     allItems.forEach(item => {
-      if (savedState[item.idx]) completedItems.push(item);
+      if (savedState[item.idx] || item.completed) completedItems.push(item);
       else currentItems.push(item);
     });
 
     // Helper: render a single agenda item
     function renderItem(item, counter, savedState) {
-      const checked = savedState[item.idx] ? ' checked' : '';
-      const checkedCls = savedState[item.idx] ? ' checked' : '';
+      const isChecked = savedState[item.idx] || item.completed;
+      const checked = isChecked ? ' checked' : '';
+      const checkedCls = isChecked ? ' checked' : '';
       // Asana link badge (replaces plain cog)
       let badge = '';
       if (item.permalink) {
