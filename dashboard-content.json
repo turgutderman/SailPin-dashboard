@@ -96,7 +96,8 @@
         "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
         "asanaGid": "1214978576518724",
         "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978576518724"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978576518724",
+        "completed": true
       },
       {
         "text": "Workflows are up and in place — confirm all running correctly",
