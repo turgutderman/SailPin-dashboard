@@ -28,13 +28,15 @@
         "text": "RSS Tasks for Asana is already updated. This is again tomorrow's overall. We're keeping the blog post on Shopify. ",
         "asanaGid": "1215111499380545",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215111499380545"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215111499380545",
+        "completed": true
       },
       {
         "text": "Google Merchant Center sale PIN is ready to go, waiting for 10 days. ",
         "asanaGid": "1215110828569030",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215110828569030"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215110828569030",
+        "completed": true
       },
       {
         "text": "Gmail forwarding Filer (to show Bonnie)",
