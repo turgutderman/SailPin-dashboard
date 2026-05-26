@@ -9,26 +9,140 @@
   "callAgenda": {
     "date": "2026-05-26",
     "items": [
-      {"text":"Agenda Side Notes with Subtasks","asanaGid":"1215137724268784","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215137724268784","subtaskCount":4},
-      {"text":"shop.app/m/sailpin ","asanaGid":"1215137431481701","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215137431481701"},
-      {"text":"RSS Tasks for Asana is already updated. This is again tomorrow's overall. We're keeping the blog post on Shopify. ","asanaGid":"1215111499380545","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215111499380545"},
-      {"text":"Google Merchant Center sale PIN is ready to go, waiting for 10 days. ","asanaGid":"1215110828569030","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215110828569030"},
-      {"text":"Gmail forwarding Filer (to show Bonnie)","asanaGid":"1215037811944713","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944713"},
-      {"text":"SailPİn Google Accounst all updated and connected to Shopify ","asanaGid":"1215037811944715","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944715","description":"This is the Friday session","subtaskCount":1,"completed":true},
-      {"text":"How Frances could actually update the site","asanaGid":"1215029763424793","date":"2026-05-21","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215029763424793","completed":true},
-      {"text":"This a test task from Asana to Vercel","asanaGid":"1215037811944703","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944703","completed":true},
-      {"text":"RSS feed is High Priority","asanaGid":"1215037811944709","date":"2026-05-26","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944709"},
-      {"text":"Discuss with Bonnie and Frances — additional items for today","asanaGid":"1214978421732855","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421732855","completed":true},
-      {"text":"Make Setup up and running Shopify Connection","asanaGid":"1214978379377696","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379377696","completed":true},
-      {"text":"Asana tasks Update is running","asanaGid":"1215037811944707","date":null,"permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944707","completed":true},
-      {"text":"Auto-publish endpoint is live — agenda updates now flow directly from Claude","asanaGid":"1214978576518724","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978576518724"},
-      {"text":"Workflows are up and in place — confirm all running correctly","asanaGid":"1214978219699164","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978219699164"},
-      {"text":"[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL","asanaGid":"1214978421595348","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421595348","completed":true},
-      {"text":"[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus","asanaGid":"1214978421660686","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421660686"},
-      {"text":"[MirthPlus] End date for roll-on product — pulling it back","asanaGid":"1214978379496738","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379496738","completed":true},
-      {"text":"[SailPin] Explore Printful All-Over Print collection for PoD products","asanaGid":"1214978379426417","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379426417","description":"https://www.printful.com/custom/collections/all-over-printT"},
-      {"text":"[MirthPlus] Insomniac Brothers","asanaGid":"1214978421773717","date":"2026-05-20","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421773717","completed":true},
-      {"text":"[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call","asanaGid":"1215032506033006","date":"2026-05-21","permalink":"https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215032506033006"}
+      {
+        "text": "Agenda Side Notes with Subtasks",
+        "asanaGid": "1215137724268784",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215137724268784",
+        "subtaskCount": 4,
+        "completed": true
+      },
+      {
+        "text": "shop.app/m/sailpin ",
+        "asanaGid": "1215137431481701",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215137431481701"
+      },
+      {
+        "text": "RSS Tasks for Asana is already updated. This is again tomorrow's overall. We're keeping the blog post on Shopify. ",
+        "asanaGid": "1215111499380545",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215111499380545"
+      },
+      {
+        "text": "Google Merchant Center sale PIN is ready to go, waiting for 10 days. ",
+        "asanaGid": "1215110828569030",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215110828569030"
+      },
+      {
+        "text": "Gmail forwarding Filer (to show Bonnie)",
+        "asanaGid": "1215037811944713",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944713"
+      },
+      {
+        "text": "SailPİn Google Accounst all updated and connected to Shopify ",
+        "asanaGid": "1215037811944715",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944715",
+        "description": "This is the Friday session",
+        "subtaskCount": 1,
+        "completed": true
+      },
+      {
+        "text": "How Frances could actually update the site",
+        "asanaGid": "1215029763424793",
+        "date": "2026-05-21",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215029763424793",
+        "completed": true
+      },
+      {
+        "text": "This a test task from Asana to Vercel",
+        "asanaGid": "1215037811944703",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944703",
+        "completed": true
+      },
+      {
+        "text": "RSS feed is High Priority",
+        "asanaGid": "1215037811944709",
+        "date": "2026-05-26",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944709"
+      },
+      {
+        "text": "Discuss with Bonnie and Frances — additional items for today",
+        "asanaGid": "1214978421732855",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421732855",
+        "completed": true
+      },
+      {
+        "text": "Make Setup up and running Shopify Connection",
+        "asanaGid": "1214978379377696",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379377696",
+        "completed": true
+      },
+      {
+        "text": "Asana tasks Update is running",
+        "asanaGid": "1215037811944707",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944707",
+        "completed": true
+      },
+      {
+        "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
+        "asanaGid": "1214978576518724",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978576518724"
+      },
+      {
+        "text": "Workflows are up and in place — confirm all running correctly",
+        "asanaGid": "1214978219699164",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978219699164"
+      },
+      {
+        "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
+        "asanaGid": "1214978421595348",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421595348",
+        "completed": true
+      },
+      {
+        "text": "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
+        "asanaGid": "1214978421660686",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421660686"
+      },
+      {
+        "text": "[MirthPlus] End date for roll-on product — pulling it back",
+        "asanaGid": "1214978379496738",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379496738",
+        "completed": true
+      },
+      {
+        "text": "[SailPin] Explore Printful All-Over Print collection for PoD products",
+        "asanaGid": "1214978379426417",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379426417",
+        "description": "https://www.printful.com/custom/collections/all-over-printT"
+      },
+      {
+        "text": "[MirthPlus] Insomniac Brothers",
+        "asanaGid": "1214978421773717",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421773717",
+        "completed": true
+      },
+      {
+        "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
+        "asanaGid": "1215032506033006",
+        "date": "2026-05-21",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215032506033006"
+      }
     ]
   },
   "pinnedNotes": [
