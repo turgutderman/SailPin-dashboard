@@ -486,17 +486,18 @@ function renderUpdates() {
     let savedState = [];
     try { savedState = JSON.parse(localStorage.getItem('sp_agenda') || '[]'); } catch(e) {}
 
-    // Split items into current vs completed based on Asana status + saved state
+    // Split items: Asana-linked items use Asana status as source of truth; others use localStorage
     const currentItems = [];
     const completedItems = [];
     allItems.forEach(item => {
-      if (savedState[item.idx] || item.completed) completedItems.push(item);
+      const isDone = item.gid ? item.completed : savedState[item.idx];
+      if (isDone) completedItems.push(item);
       else currentItems.push(item);
     });
 
     // Helper: render a single agenda item
     function renderItem(item, counter, savedState) {
-      const isChecked = savedState[item.idx] || item.completed;
+      const isChecked = item.gid ? item.completed : savedState[item.idx];
       const checked = isChecked ? ' checked' : '';
       const checkedCls = isChecked ? ' checked' : '';
       // Asana link badge (replaces plain cog)
