@@ -22,27 +22,6 @@
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215110828569030"
       },
       {
-        "text": "this is frances",
-        "asanaGid": "1215035208093643",
-        "date": "2026-05-21",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215035208093643",
-        "completed": true
-      },
-      {
-        "text": "This a test task from Asana to Vercel",
-        "asanaGid": "1215037811944703",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944703",
-        "completed": true
-      },
-      {
-        "text": "How Frances could actually update the site",
-        "asanaGid": "1215029763424793",
-        "date": "2026-05-21",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215029763424793",
-        "completed": true
-      },
-      {
         "text": "Gmail forwarding Filer (to show Bonnie)",
         "asanaGid": "1215037811944713",
         "date": null,
@@ -55,6 +34,20 @@
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944715",
         "description": "This is the Friday session",
         "subtaskCount": 1,
+        "completed": true
+      },
+      {
+        "text": "How Frances could actually update the site",
+        "asanaGid": "1215029763424793",
+        "date": "2026-05-21",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215029763424793",
+        "completed": true
+      },
+      {
+        "text": "This a test task from Asana to Vercel",
+        "asanaGid": "1215037811944703",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944703",
         "completed": true
       },
       {
