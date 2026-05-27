@@ -4,11 +4,17 @@
   "announcement": {
     "show": true,
     "type": "success",
-    "text": "Dashboard upgraded to live data \u2014 GHL + Asana refresh automatically."
+    "text": "Dashboard upgraded to live data — GHL + Asana refresh automatically."
   },
   "callAgenda": {
     "date": "2026-05-26",
     "items": [
+      {
+        "text": "Derman is rebranding. ",
+        "asanaGid": "1215151933464942",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215151933464942"
+      },
       {
         "text": "Now what shall we do with the ones that completed the quiz....",
         "asanaGid": "1215148287011339",
@@ -60,7 +66,7 @@
         "completed": true
       },
       {
-        "text": "SailP\u0130n Google Accounst all updated and connected to Shopify ",
+        "text": "SailPİn Google Accounst all updated and connected to Shopify ",
         "asanaGid": "1215037811944715",
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944715",
@@ -89,7 +95,7 @@
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944709"
       },
       {
-        "text": "Discuss with Bonnie and Frances \u2014 additional items for today",
+        "text": "Discuss with Bonnie and Frances — additional items for today",
         "asanaGid": "1214978421732855",
         "date": "2026-05-20",
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421732855",
@@ -110,14 +116,14 @@
         "completed": true
       },
       {
-        "text": "Auto-publish endpoint is live \u2014 agenda updates now flow directly from Claude",
+        "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
         "asanaGid": "1214978576518724",
         "date": "2026-05-20",
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978576518724",
         "completed": true
       },
       {
-        "text": "Workflows are up and in place \u2014 confirm all running correctly",
+        "text": "Workflows are up and in place — confirm all running correctly",
         "asanaGid": "1214978219699164",
         "date": "2026-05-20",
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978219699164",
@@ -138,7 +144,7 @@
         "completed": true
       },
       {
-        "text": "[MirthPlus] End date for roll-on product \u2014 pulling it back",
+        "text": "[MirthPlus] End date for roll-on product — pulling it back",
         "asanaGid": "1214978379496738",
         "date": "2026-05-20",
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379496738",
@@ -159,7 +165,7 @@
         "completed": true
       },
       {
-        "text": "[SailPin] Google Merchant Center for SailPin is connected \u2014 tomorrow's call",
+        "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
         "asanaGid": "1215032506033006",
         "date": "2026-05-21",
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215032506033006",
@@ -175,7 +181,7 @@
     },
     {
       "title": "Auto-Publish Active",
-      "text": "Dashboard content can now be updated by dictating to Claude \u2014 no terminal or git needed.",
+      "text": "Dashboard content can now be updated by dictating to Claude — no terminal or git needed.",
       "date": "2026-05-26"
     },
     {
