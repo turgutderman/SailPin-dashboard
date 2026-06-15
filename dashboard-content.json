@@ -40,7 +40,14 @@
         "text": "BluePrint updates",
         "asanaGid": "1215727108785462",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785462"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785462",
+        "completed": true
+      },
+      {
+        "text": "SailPin new design route",
+        "asanaGid": "1215729470319079",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215729470319079"
       },
       {
         "text": "BPA new course?",
@@ -90,12 +97,6 @@
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379426417",
         "description": "https://www.printful.com/custom/collections/all-over-printT"
-      },
-      {
-        "text": "SailPin new design route",
-        "asanaGid": "1215729470319079",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215729470319079"
       },
       {
         "text": "HyperAgent!",
