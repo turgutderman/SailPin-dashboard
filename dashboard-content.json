@@ -34,7 +34,8 @@
         "text": "Derman.me",
         "asanaGid": "1215727108785464",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785464"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785464",
+        "completed": true
       },
       {
         "text": "BluePrint updates",
@@ -74,13 +75,15 @@
         "text": "Manus on Shopify",
         "asanaGid": "1215678357961341",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215678357961341"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215678357961341",
+        "completed": true
       },
       {
         "text": "Codex keeps crashing",
         "asanaGid": "1215727108785466",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785466"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785466",
+        "completed": true
       },
       {
         "text": "New Avatar for Gemini and Gemini desktop app ",
