@@ -31,6 +31,24 @@
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215729470319075"
       },
       {
+        "text": "Derman.me",
+        "asanaGid": "1215727108785464",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785464"
+      },
+      {
+        "text": "BluePrint updates",
+        "asanaGid": "1215727108785462",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785462"
+      },
+      {
+        "text": "BPA new course?",
+        "asanaGid": "1215727108785468",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785468"
+      },
+      {
         "text": "Google G4A review process",
         "asanaGid": "1215678357961337",
         "date": null,
@@ -49,28 +67,35 @@
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215678357961341"
       },
       {
-        "text": "BluePrint updates",
-        "asanaGid": "1215727108785462",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785462"
-      },
-      {
-        "text": "Derman.me",
-        "asanaGid": "1215727108785464",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785464"
-      },
-      {
         "text": "Codex keeps crashing",
         "asanaGid": "1215727108785466",
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785466"
       },
       {
-        "text": "BPA new course?",
-        "asanaGid": "1215727108785468",
+        "text": "New Avatar for Gemini and Gemini desktop app ",
+        "asanaGid": "1215249946159809",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215727108785468"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215249946159809"
+      },
+      {
+        "text": "Daily Brief section. Are you using this at all? ",
+        "asanaGid": "1215249946159813",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215249946159813"
+      },
+      {
+        "text": "[SailPin] Explore Printful All-Over Print collection for PoD products",
+        "asanaGid": "1214978379426417",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379426417",
+        "description": "https://www.printful.com/custom/collections/all-over-printT"
+      },
+      {
+        "text": "SailPin new design ",
+        "asanaGid": "1215729470319079",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215729470319079"
       },
       {
         "text": "HyperAgent!",
@@ -115,23 +140,11 @@
         "completed": true
       },
       {
-        "text": "New Avatar for Gemini and Gemini desktop app ",
-        "asanaGid": "1215249946159809",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215249946159809"
-      },
-      {
         "text": "Derman.biz rebranding. ",
         "asanaGid": "1215151933464942",
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215151933464942",
         "completed": true
-      },
-      {
-        "text": "Daily Brief section. Are you using this at all? ",
-        "asanaGid": "1215249946159813",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215249946159813"
       },
       {
         "text": "What's the update? https://assets.asana.biz/asset/53277a4d-ce41-4eb5-ba86-314c1c7365d4/Spring-2026-Release-Kit.pdf",
@@ -256,13 +269,6 @@
         "date": "2026-05-20",
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978219699164",
         "completed": true
-      },
-      {
-        "text": "[SailPin] Explore Printful All-Over Print collection for PoD products",
-        "asanaGid": "1214978379426417",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379426417",
-        "description": "https://www.printful.com/custom/collections/all-over-printT"
       },
       {
         "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
