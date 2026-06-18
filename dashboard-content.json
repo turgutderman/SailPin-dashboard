@@ -27,13 +27,15 @@
         "text": "Notion setup",
         "asanaGid": "1215802597575099",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215802597575099"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215802597575099",
+        "completed": true
       },
       {
         "text": "Notion Marketplace",
         "asanaGid": "1215776924328575",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215776924328575"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215776924328575",
+        "completed": true
       },
       {
         "text": "Hermes: https://hermes-agent.org/",
