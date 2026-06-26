@@ -10,6 +10,12 @@
     "date": "2026-05-26",
     "items": [
       {
+        "text": "Bardo Logo options",
+        "asanaGid": "1215972608725505",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215972608725505"
+      },
+      {
         "text": "Figma: ",
         "asanaGid": "1216043449386836",
         "date": null,
@@ -17,10 +23,16 @@
         "description": "https://www.figma.com/board/D0kfmvm7txPG185Mc9YnIy/Sailpin-Workshop?node-id=0-1&p=f&t=vgt8dBCtsFZz0Nc8-0\n\nhttps://app.asana.com/app/asana/-/get_asset?asset_id=1216043449386843"
       },
       {
-        "text": "Go High Level Mirth emails",
-        "asanaGid": "1216043449386848",
+        "text": "Lock down the Bardo Logo",
+        "asanaGid": "1216043449386850",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216043449386848"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216043449386850"
+      },
+      {
+        "text": "Claude Design Setup",
+        "asanaGid": "1216078457991019",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216078457991019"
       },
       {
         "text": "Muhammad probably wednesday with ideas",
@@ -30,10 +42,10 @@
         "completed": true
       },
       {
-        "text": "Bardo Logo options",
-        "asanaGid": "1215972608725505",
+        "text": "Go High Level Mirth emails",
+        "asanaGid": "1216043449386848",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215972608725505"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216043449386848"
       },
       {
         "text": "Go High Level Free AI",
