@@ -20,7 +20,8 @@
         "text": "Anthropeum\n: https://anthropeum.com/",
         "asanaGid": "1216122885950468",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122885950468"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122885950468",
+        "completed": true
       },
       {
         "text": "Review of Logo",
@@ -46,7 +47,8 @@
         "text": "Bardo Logo options",
         "asanaGid": "1215972608725505",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215972608725505"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215972608725505",
+        "completed": true
       },
       {
         "text": "Moving Bardo to Go-High Level",
