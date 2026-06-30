@@ -10,6 +10,18 @@
     "date": "2026-05-26",
     "items": [
       {
+        "text": "Meet bardobay.com",
+        "asanaGid": "1216122742909393",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122742909393"
+      },
+      {
+        "text": "Moving Bardo to Go-High Level",
+        "asanaGid": "1216122885950476",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122885950476"
+      },
+      {
         "text": "Muhammad: https://www.figma.com/board/pUPabiAXWTEtqxW7WGEIE2/Sailpin-Workshop--Copy-?t=c6ezn5UfMuKly2Ua-6",
         "asanaGid": "1216122885950466",
         "date": null,
@@ -41,13 +53,8 @@
         "text": "Onboarding update",
         "asanaGid": "1216122742909391",
         "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122742909391"
-      },
-      {
-        "text": "M",
-        "asanaGid": "1216122742909393",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122742909393"
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122742909391",
+        "completed": true
       },
       {
         "text": "Bardo Logo options",
@@ -57,13 +64,7 @@
         "completed": true
       },
       {
-        "text": "Moving Bardo to Go-High Level",
-        "asanaGid": "1216122885950476",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122885950476"
-      },
-      {
-        "text": "Claude Design Setup",
+        "text": "Claude meets Terminal Setup",
         "asanaGid": "1216078457991019",
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216078457991019"
@@ -74,6 +75,12 @@
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216043449386848",
         "completed": true
+      },
+      {
+        "text": "Claude meets Google tasks",
+        "asanaGid": "1216192243728301",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728301"
       },
       {
         "text": "Figma: ",
