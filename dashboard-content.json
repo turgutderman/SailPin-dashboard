@@ -83,12 +83,6 @@
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728301"
       },
       {
-        "text": "@Frances Could you check the email campaign is attached too Workflows and if it is triggering anything form previous workflows",
-        "asanaGid": "1216192243728303",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728303"
-      },
-      {
         "text": "Figma: ",
         "asanaGid": "1216043449386836",
         "date": null,
@@ -403,6 +397,12 @@
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944703",
         "completed": true
+      },
+      {
+        "text": "@Frances Could you check: Descript the email campaign is attached too Workflows and if it is triggering anything form previous workflows",
+        "asanaGid": "1216192243728303",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728303"
       },
       {
         "text": "RSS feed is High Priority",
