@@ -10,6 +10,61 @@
     "date": "2026-05-26",
     "items": [
       {
+        "text": "@Frances Could you check: Descript the email campaign is attached too Workflows and if it is triggering anything form previous workflows",
+        "asanaGid": "1216192243728303",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728303"
+      },
+      {
+        "text": "Workflows are up and in place — confirm all running correctly",
+        "asanaGid": "1214978219699164",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978219699164",
+        "completed": true
+      },
+      {
+        "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
+        "asanaGid": "1214978421595348",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421595348",
+        "completed": true
+      },
+      {
+        "text": "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
+        "asanaGid": "1214978421660686",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421660686",
+        "completed": true
+      },
+      {
+        "text": "[MirthPlus] End date for roll-on product — pulling it back",
+        "asanaGid": "1214978379496738",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379496738",
+        "completed": true
+      },
+      {
+        "text": "[MirthPlus] Insomniac Brothers",
+        "asanaGid": "1214978421773717",
+        "date": "2026-05-20",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421773717",
+        "completed": true
+      },
+      {
+        "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
+        "asanaGid": "1215032506033006",
+        "date": "2026-05-21",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215032506033006",
+        "completed": true
+      },
+      {
+        "text": "Message from Turgut — test test 123 echo",
+        "asanaGid": "1216222211862549",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216222211862549",
+        "description": "https://app.asana.com/0/1213948223959735/ Hey Frances, check this out, test test 123 echo."
+      },
+      {
         "text": "Meet bardobay.com",
         "asanaGid": "1216122742909393",
         "date": null,
@@ -397,96 +452,6 @@
         "date": null,
         "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944703",
         "completed": true
-      },
-      {
-        "text": "@Frances Could you check: Descript the email campaign is attached too Workflows and if it is triggering anything form previous workflows",
-        "asanaGid": "1216192243728303",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728303"
-      },
-      {
-        "text": "RSS feed is High Priority",
-        "asanaGid": "1215037811944709",
-        "date": "2026-05-26",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944709",
-        "completed": true
-      },
-      {
-        "text": "Discuss with Bonnie and Frances — additional items for today",
-        "asanaGid": "1214978421732855",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421732855",
-        "completed": true
-      },
-      {
-        "text": "Make Setup up and running Shopify Connection",
-        "asanaGid": "1214978379377696",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379377696",
-        "completed": true
-      },
-      {
-        "text": "Asana tasks Update is running",
-        "asanaGid": "1215037811944707",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215037811944707",
-        "completed": true
-      },
-      {
-        "text": "Auto-publish endpoint is live — agenda updates now flow directly from Claude",
-        "asanaGid": "1214978576518724",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978576518724",
-        "completed": true
-      },
-      {
-        "text": "Workflows are up and in place — confirm all running correctly",
-        "asanaGid": "1214978219699164",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978219699164",
-        "completed": true
-      },
-      {
-        "text": "[MirthPlus] Separate MirthPlus contacts from SailPin contacts in GHL",
-        "asanaGid": "1214978421595348",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421595348",
-        "completed": true
-      },
-      {
-        "text": "[MirthPlus] Re-assign Google Voice contacts (chiropractors, massage centers, other businesses from previous email campaigns) to MirthPlus",
-        "asanaGid": "1214978421660686",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421660686",
-        "completed": true
-      },
-      {
-        "text": "[MirthPlus] End date for roll-on product — pulling it back",
-        "asanaGid": "1214978379496738",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978379496738",
-        "completed": true
-      },
-      {
-        "text": "[MirthPlus] Insomniac Brothers",
-        "asanaGid": "1214978421773717",
-        "date": "2026-05-20",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1214978421773717",
-        "completed": true
-      },
-      {
-        "text": "[SailPin] Google Merchant Center for SailPin is connected — tomorrow's call",
-        "asanaGid": "1215032506033006",
-        "date": "2026-05-21",
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1215032506033006",
-        "completed": true
-      },
-      {
-        "text": "Message from Turgut — test test 123 echo",
-        "asanaGid": "1216222211862549",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216222211862549",
-        "description": "https://app.asana.com/0/1213948223959735/ Hey Frances, check this out, test test 123 echo."
       }
     ]
   },
