@@ -10,41 +10,25 @@
     "date": "2026-05-26",
     "items": [
       {
-        "text": "@Frances Could you check: Descript the email campaign is attached too Workflows and if it is triggering anything form previous workflows",
-        "asanaGid": "1216192243728303",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728303"
+        "text": "Mirth — Facebook updates",
+        "asanaGid": "1216475425476912",
+        "date": "2026-07-13",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1216491341284847/task/1216475425476912",
+        "description": "Monday Bonnie agenda: MirthPlus Facebook updates."
       },
       {
-        "text": "Message from Turgut — test test 123 echo",
-        "asanaGid": "1216222211862549",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216222211862549",
-        "description": "https://app.asana.com/0/1213948223959735/ Hey Frances, check this out, test test 123 echo."
+        "text": "Manus — the email",
+        "asanaGid": "1216491341536730",
+        "date": "2026-07-13",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1216491341284847/task/1216491341536730",
+        "description": "Monday Bonnie agenda: Manus overnight dispatcher pilot #1 (Sailpin scan) — reply expected ~Jul 13."
       },
       {
-        "text": "Meet bardobay.com",
-        "asanaGid": "1216122742909393",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122742909393"
-      },
-      {
-        "text": "Moving Bardo to Go-High Level",
-        "asanaGid": "1216122885950476",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216122885950476"
-      },
-      {
-        "text": "Claude meets Terminal Setup",
-        "asanaGid": "1216078457991019",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216078457991019"
-      },
-      {
-        "text": "Claude meets Google tasks",
-        "asanaGid": "1216192243728301",
-        "date": null,
-        "permalink": "https://app.asana.com/1/1209369343885509/project/1214978656234047/task/1216192243728301"
+        "text": "sefine.biz update",
+        "asanaGid": "1216475568185686",
+        "date": "2026-07-13",
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1216491341284847/task/1216475568185686",
+        "description": "Monday Bonnie agenda: status on sefine.biz eBay auto-parts site rebuild on Vercel."
       }
     ]
   },
