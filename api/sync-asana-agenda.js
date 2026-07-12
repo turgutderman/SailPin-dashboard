@@ -1,12 +1,12 @@
 // Vercel Serverless Function: Auto-sync Asana agenda → dashboard
-// Pulls all tasks from the "Dashboard Agenda" Asana project,
+// Pulls all tasks from the "Agenda" Asana project,
 // rebuilds callAgenda.items in dashboard-content.json,
 // and commits the update to GitHub (triggering Vercel redeploy).
 //
 // Zero Claude credits — runs entirely on Vercel infrastructure.
 // Trigger via Vercel cron or external cron service (e.g. cron-job.org).
 
-const ASANA_PROJECT_GID = '1214978656234047';
+const ASANA_PROJECT_GID = '1216491341284847';
 const REPO = 'turgutderman/SailPin-dashboard';
 const FILE_PATH = 'dashboard-content.json';
 
