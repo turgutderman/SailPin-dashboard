@@ -10,6 +10,20 @@
     "date": "2026-05-26",
     "items": [
       {
+        "text": "Hugging Face",
+        "asanaGid": "1216528789160666",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1216491341284847/task/1216528789160666",
+        "description": "Added from Peri reminders chat."
+      },
+      {
+        "text": "Qwen",
+        "asanaGid": "1216528801980365",
+        "date": null,
+        "permalink": "https://app.asana.com/1/1209369343885509/project/1216491341284847/task/1216528801980365",
+        "description": "Added from Peri reminders chat."
+      },
+      {
         "text": "Obsidian setup",
         "asanaGid": "1216523084873410",
         "date": "2026-07-13",
