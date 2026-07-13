@@ -1,5 +1,5 @@
 // Vercel Serverless Function: Auto-sync Asana agenda → dashboard
-// Pulls all tasks from the "Agenda" Asana project,
+// Pulls all tasks from the "Dashboard Agenda" Asana project,
 // rebuilds callAgenda.items in dashboard-content.json,
 // and commits the update to GitHub (triggering Vercel redeploy).
 //
