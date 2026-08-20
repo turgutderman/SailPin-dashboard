@@ -101,6 +101,16 @@ main{max-width:1280px;margin:0 auto;padding:24px 24px 80px}
 .contacts-table tr:hover td{background:var(--sand)}
 
 /* CALL AGENDA */
+.agenda-composer{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;background:var(--sun-white);border:1px solid var(--linen);border-left:5px solid var(--coral);border-radius:12px;padding:12px 14px;box-shadow:0 2px 8px rgba(13,47,85,.06);align-items:center}
+.agenda-composer input[type=text]{flex:1;min-width:200px;border:none;background:transparent;font-size:14px;color:var(--ink);outline:none;font-family:inherit}
+.agenda-composer input[type=text]::placeholder{color:var(--slate);font-style:italic}
+.agenda-composer input[type=date]{border:1px solid var(--linen);background:#fff;border-radius:8px;padding:6px 8px;font-size:12px;color:var(--slate);font-family:inherit}
+.agenda-composer button{background:var(--pacific);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit}
+.agenda-composer button:hover{background:var(--pacific-mid)}
+.agenda-composer button:disabled{opacity:.6;cursor:wait}
+.composer-status{font-size:12px;margin:-6px 0 8px 6px;min-height:16px}
+.composer-status.ok{color:var(--success)}
+.composer-status.err{color:var(--error)}
 .agenda-tabs{display:flex;gap:4px;margin-bottom:0;align-items:center}
 .agenda-tab{padding:10px 20px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;border-radius:10px 10px 0 0;transition:.2s;background:var(--sand-dark)}
 .agenda-tab.active{background:var(--sun-white);color:var(--pacific-dark);box-shadow:0 -2px 8px rgba(13,47,85,.06)}
@@ -199,6 +209,12 @@ footer strong{color:var(--pacific-dark)}
 <!-- ===== UPDATES & AGENDA (always visible at top) ===== -->
 <div id="top-updates">
   <div class="section-title"><span class="icon">&#127909;</span> Call Agenda</div>
+  <div class="agenda-composer">
+    <input type="text" id="composer-text" maxlength="300" placeholder="Add an agenda item &mdash; catch it now, discuss it on the call&hellip;" onkeydown="if(event.key==='Enter'){addAgendaItem()}">
+    <input type="date" id="composer-date" title="Due date (optional)">
+    <button id="composer-add" onclick="addAgendaItem()">+ Add</button>
+  </div>
+  <div class="composer-status" id="composer-status"></div>
   <div class="agenda-tabs">
     <div class="agenda-tab active" data-atab="current" onclick="switchAgendaTab('current')">Current Items <span class="agenda-count" id="count-current">0</span></div>
     <div class="agenda-tab" data-atab="completed" onclick="switchAgendaTab('completed')">Completed Items <span class="agenda-count" id="count-completed">0</span></div>
@@ -464,8 +480,12 @@ function renderAsana() {
   taskTable(asana.noDueTasks, 'asana-nodue');
 }
 
+function escapeHtml(text) {
+  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 function linkify(text) {
-  return text.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--pacific-mid);word-break:break-all">$1</a>');
+  return escapeHtml(text).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--pacific-mid);word-break:break-all">$1</a>');
 }
 
 function renderUpdates() {
@@ -679,7 +699,7 @@ function renderDetails(panel, data, idx) {
   const desc = item?.description || '';
   if (desc) {
     html += '<div class="detail-section"><div class="detail-label">Description</div>';
-    html += '<div>' + linkify(desc.replace(/\n/g, '<br>')) + '</div></div>';
+    html += '<div>' + linkify(desc).replace(/\n/g, '<br>') + '</div></div>';
   }
 
   // Subtasks
@@ -701,7 +721,7 @@ function renderDetails(panel, data, idx) {
     data.comments.forEach(c => {
       html += '<div class="detail-comment"><strong>' + c.author + '</strong>';
       if (c.date) html += ' <span style="color:var(--slate);font-size:10px">' + c.date + '</span>';
-      html += '<div>' + linkify(c.text.replace(/\n/g, '<br>')) + '</div></div>';
+      html += '<div>' + linkify(c.text).replace(/\n/g, '<br>') + '</div></div>';
     });
     html += '</div>';
   }
@@ -809,6 +829,60 @@ function toggleAllDetails() {
     btn.classList.remove('loading');
     btn.classList.add('done');
     btn.innerHTML = '&#9650; Collapse All';
+  });
+}
+
+// ===== AGENDA COMPOSER: WRITE ITEMS DIRECTLY TO ASANA =====
+function addAgendaItem() {
+  const input = document.getElementById('composer-text');
+  const dateEl = document.getElementById('composer-date');
+  const btn = document.getElementById('composer-add');
+  const status = document.getElementById('composer-status');
+  const text = input.value.trim();
+  if (!text) { input.focus(); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Adding…';
+  status.textContent = '';
+  status.className = 'composer-status';
+
+  const payload = { text: text };
+  if (dateEl.value) payload.due_on = dateEl.value;
+
+  fetch('/api/agenda-add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (!data.success) throw new Error(data.error || 'add failed');
+    // Optimistic insert — the Asana sync will confirm it on the next refresh
+    content = content || {};
+    content.callAgenda = content.callAgenda || {};
+    content.callAgenda.items = content.callAgenda.items || [];
+    content.callAgenda.items.push({
+      text: data.name,
+      asanaGid: data.taskGid,
+      date: data.due_on || null,
+      permalink: data.permalink || null
+    });
+    renderUpdates();
+    switchAgendaTab('current');
+    input.value = '';
+    dateEl.value = '';
+    status.textContent = '✓ Added to the agenda and saved to Asana';
+    status.className = 'composer-status ok';
+    setTimeout(() => { if (status.className.indexOf('ok') > -1) { status.textContent = ''; status.className = 'composer-status'; } }, 5000);
+  })
+  .catch(err => {
+    status.textContent = '⚠ Could not add item — ' + err.message;
+    status.className = 'composer-status err';
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.textContent = '+ Add';
+    input.focus();
   });
 }
 
